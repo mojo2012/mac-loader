@@ -498,7 +498,7 @@
 																	</object>
 																	<object class="NSTextFieldCell" key="NSDataCell" id="758309901">
 																		<int key="NSCellFlags">337772096</int>
-																		<int key="NSCellFlags2">2048</int>
+																		<int key="NSCellFlags2">2560</int>
 																		<string key="NSContents">Text Cell</string>
 																		<reference key="NSSupport" ref="903540210"/>
 																		<reference key="NSControlView" ref="137006037"/>
@@ -515,7 +515,6 @@
 																	</object>
 																	<int key="NSResizingMask">3</int>
 																	<bool key="NSIsResizeable">YES</bool>
-																	<bool key="NSIsEditable">YES</bool>
 																	<reference key="NSTableView" ref="137006037"/>
 																</object>
 															</object>
@@ -545,17 +544,16 @@
 																</object>
 															</object>
 															<double key="NSRowHeight">17</double>
-															<int key="NSTvFlags">-767557632</int>
+															<int key="NSTvFlags">1379926016</int>
 															<reference key="NSDelegate"/>
 															<reference key="NSDataSource"/>
-															<int key="NSColumnAutoresizingStyle">4</int>
+															<int key="NSColumnAutoresizingStyle">5</int>
 															<int key="NSDraggingSourceMaskForLocal">15</int>
 															<int key="NSDraggingSourceMaskForNonLocal">0</int>
 															<bool key="NSAllowsTypeSelect">YES</bool>
 															<int key="NSTableViewSelectionHighlightStyle">1</int>
 															<int key="NSTableViewDraggingDestinationStyle">1</int>
 															<int key="NSTableViewGroupRowStyle">1</int>
-															<bool key="NSOutlineViewAutoresizesOutlineColumnKey">NO</bool>
 															<float key="NSOutlineViewIndentationPerLevelKey">14</float>
 														</object>
 													</object>
@@ -634,7 +632,7 @@
 															<string key="NSFrameSize">{462, 402}</string>
 															<reference key="NSSuperview" ref="609438993"/>
 															<reference key="NSWindow"/>
-															<reference key="NSNextKeyView" ref="555810978"/>
+															<reference key="NSNextKeyView" ref="927812123"/>
 															<string key="NSReuseIdentifierKey">_NS:1828</string>
 															<bool key="NSEnabled">YES</bool>
 															<object class="NSTableHeaderView" key="NSHeaderView" id="459969161">
@@ -809,7 +807,7 @@
 											<string key="NSFrame">{{-1, -1}, {464, 387}}</string>
 											<reference key="NSSuperview" ref="827111976"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView" ref="927812123"/>
+											<reference key="NSNextKeyView" ref="609438993"/>
 											<string key="NSReuseIdentifierKey">_NS:1824</string>
 											<int key="NSsFlags">133746</int>
 											<reference key="NSVScroller" ref="263933988"/>
@@ -846,7 +844,6 @@
 									<string key="NSFrame">{{2, 2}, {628, 0}}</string>
 									<reference key="NSSuperview" ref="49657172"/>
 									<reference key="NSWindow"/>
-									<reference key="NSNextKeyView"/>
 								</object>
 							</object>
 							<string key="NSFrame">{{0, 20}, {632, 2}}</string>
@@ -886,7 +883,7 @@
 					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="490330094"/>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
+				<string key="NSScreenRect">{{0, 0}, {1920, 1058}}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<bool key="NSWindowIsRestorable">YES</bool>
 			</object>
@@ -1471,7 +1468,6 @@
 							<string>mainWindow</string>
 							<string>mainWindowToolbar</string>
 							<string>sidebar</string>
-							<string>sidebarSplitView</string>
 							<string>sidebarView</string>
 							<string>splitView</string>
 							<string>startDownloadButton</string>
@@ -1486,7 +1482,6 @@
 							<string>MainWindow</string>
 							<string>NSToolbar</string>
 							<string>NSOutlineView</string>
-							<string>NSView</string>
 							<string>NSView</string>
 							<string>NSSplitView</string>
 							<string>NSButton</string>
@@ -1504,7 +1499,6 @@
 							<string>mainWindow</string>
 							<string>mainWindowToolbar</string>
 							<string>sidebar</string>
-							<string>sidebarSplitView</string>
 							<string>sidebarView</string>
 							<string>splitView</string>
 							<string>startDownloadButton</string>
@@ -1539,10 +1533,6 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">sidebar</string>
 								<string key="candidateClassName">NSOutlineView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">sidebarSplitView</string>
-								<string key="candidateClassName">NSView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">sidebarView</string>

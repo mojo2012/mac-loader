@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using MonoMac.Foundation;
 using MonoMac.AppKit;
+using System.IO;
 
 namespace MacLoader {
 	public partial class MainWindowController : MonoMac.AppKit.NSWindowController {
 		#region Constructors
+		
+		static string resourcesPath = NSBundle.MainBundle.ResourceUrl.Path;
 		
 		// Called when created from unmanaged code
 		public MainWindowController(IntPtr handle) : base (handle) {
@@ -70,19 +72,23 @@ namespace MacLoader {
 			downloadsRoot.IsHeader = true;
 			rootItems.Add(downloadsRoot);
 			
-			NSImage icon = new NSImage("/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/SidebarDownloadsFolder.icns");
-			icon.Size = new System.Drawing.SizeF(16f, 16f);
 			
-			downloadsRoot.Children.Add(new SidebarItem("All", icon));
+			NSImage iconAll = new NSImage(Path.Combine(resourcesPath, "resources", "status-downloading.png"));
+			NSImage iconDownloading = new NSImage(Path.Combine(resourcesPath, "resources", "status-downloading.png"));
+			NSImage iconCompleted = new NSImage(Path.Combine(resourcesPath, "resources", "status-completed.png"));
+			NSImage iconPaused = new NSImage(Path.Combine(resourcesPath, "resources", "status-paused.png"));
 			
-			downloadsRoot.Children.Add(new SidebarItem("Downloading"));
-			downloadsRoot.Children.Add(new SidebarItem("Completed"));
-			downloadsRoot.Children.Add(new SidebarItem("Active"));
+			//icon.Size = new System.Drawing.SizeF(16f, 16f);
 			
-			SidebarItem i = new SidebarItem("Inactive");
-			i.Children.Add(new SidebarItem("----"));
-			downloadsRoot.Children.Add(i);
-			//downloadsRoot.Children.Add(new SidebarItem("Inactive"));
+			downloadsRoot.Children.Add(new SidebarItem("All", iconAll));
+			
+			downloadsRoot.Children.Add(new SidebarItem("Downloading", iconDownloading));
+			downloadsRoot.Children.Add(new SidebarItem("Completed", iconCompleted));
+			downloadsRoot.Children.Add(new SidebarItem("Paused", iconPaused));
+			
+//			SidebarItem i = new SidebarItem("Inactive");
+//			i.Children.Add(new SidebarItem("----"));
+//			downloadsRoot.Children.Add(i);
 			
 			SidebarItem labelsRoot = new SidebarItem("Labels");
 			labelsRoot.IsHeader = true;
@@ -95,6 +101,7 @@ namespace MacLoader {
 			sidebar.OutlineTableColumn.DataCell = cell;
 			sidebar.DataSource = new SidebarDataSource(rootItems);
 			sidebar.Delegate = new SidebarDelegate();
+			sidebar.Font = NSFont.SystemFontOfSize(NSFont.SmallSystemFontSize);
 		}
 		
 		void downloadFilterBoxChanged(object sender, EventArgs e) {

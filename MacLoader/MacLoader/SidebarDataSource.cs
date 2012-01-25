@@ -29,9 +29,18 @@ namespace MacLoader {
 
 		public override NSObject GetObjectValue(NSOutlineView outlineView, NSTableColumn tableColumn, NSObject item) {
 			if (item != null) {
-				return new NSString(((SidebarItem)item).Name);
+				SidebarItem sidebarItem = (SidebarItem)item;
+				
+				string name = sidebarItem.Name;
+				
+				if (sidebarItem.IsHeader) {
+					name = name.ToUpper();
+					//outlineView.ExpandItem(item,true);
+				}
+				
+				return new NSString(name);
 			} else {
-				return new NSString("a");
+				return new NSString("");
 			}
 		}
 
@@ -110,7 +119,6 @@ namespace MacLoader {
 
 		public override bool IsGroupItem(NSOutlineView outlineView, NSObject item) {
 			if (((SidebarItem)item).IsHeader) {
-				//outlineView.ExpandItem(item);
 				return true;
 			} else {
 				return false;
@@ -121,23 +129,11 @@ namespace MacLoader {
 			return 21f;
 		}
 
-		public override bool ShouldCollapseItem(NSOutlineView outlineView, NSObject item) {
-			return false;
-		}
-
 		public override void WillDisplayCell(NSOutlineView outlineView, NSObject cell, NSTableColumn tableColumn, NSObject item) {
 			SidebarItem sidebarItem = (SidebarItem)item;
 			NSImageAndTextCell sidebarCell = (NSImageAndTextCell)cell;
 			
 			sidebarCell.Icon = sidebarItem.Icon;
-			
-			string cellText = sidebarItem.Name;
-			
-			if (sidebarItem.IsHeader) {
-				cellText = sidebarItem.Name.ToUpper();
-			}
-			
-			sidebarCell.AttributedStringValue = new NSAttributedString(cellText, new NSDictionary(){});
 		}
 	}
 }
