@@ -53,6 +53,7 @@
     <Compile Include="SidebarDataSource.cs" />
     <Compile Include="DownloadListDataSource.cs" />
     <Compile Include="SplitViewDelegate.cs" />
+    <Compile Include="user_interface\widget\NSImageAndTextCell.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainWindow.xib" />
@@ -65,5 +66,7 @@
   <Import Project="$(MSBuildExtensionsPath)\Mono\MonoMac\v0.0\Mono.MonoMac.targets" />
   <ItemGroup>
     <Folder Include="resources\" />
+    <Folder Include="user_interface\" />
+    <Folder Include="user_interface\widget\" />
   </ItemGroup>
 </Project>

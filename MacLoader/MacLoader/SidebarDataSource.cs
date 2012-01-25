@@ -47,6 +47,7 @@ namespace MacLoader {
 	public class SidebarItem : NSObject {
 		String name = "";
 		List<SidebarItem> children = new List<SidebarItem>();
+		NSImage icon = null;
 		bool isHeader = false;
 
 		public bool IsHeader {
@@ -60,6 +61,10 @@ namespace MacLoader {
 
 		public SidebarItem(String name) {
 			this.name = name;
+		}
+		
+		public SidebarItem(String name, NSImage icon) : this(name) {
+			this.icon = icon;
 		}
 
 		public List<SidebarItem> Children {
@@ -77,6 +82,15 @@ namespace MacLoader {
 			}
 			set {
 				name = value;
+			}
+		}
+
+		public NSImage Icon {
+			get {
+				return this.icon;
+			}
+			set {
+				icon = value;
 			}
 		}
 	}
@@ -112,13 +126,18 @@ namespace MacLoader {
 		}
 
 		public override void WillDisplayCell(NSOutlineView outlineView, NSObject cell, NSTableColumn tableColumn, NSObject item) {
-//			NSTextFieldCell textCell = ((NSTextFieldCell)cell);
-//			textCell.CellType = NSCellType.Image;
-//			textCell.Image = new NSImage("/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/SidebarDownloadsFolder.icns");
-			//((NSTextFieldCell)textCell).StringValue = item;
+			SidebarItem sidebarItem = (SidebarItem)item;
+			NSImageAndTextCell sidebarCell = (NSImageAndTextCell)cell;
 			
+			sidebarCell.Icon = sidebarItem.Icon;
 			
-			//base.WillDisplayCell(outlineView, cell, tableColumn, item);
+			string cellText = sidebarItem.Name;
+			
+			if (sidebarItem.IsHeader) {
+				cellText = sidebarItem.Name.ToUpper();
+			}
+			
+			sidebarCell.AttributedStringValue = new NSAttributedString(cellText, new NSDictionary(){});
 		}
 	}
 }

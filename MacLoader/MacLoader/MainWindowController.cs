@@ -66,22 +66,33 @@ namespace MacLoader {
 		void SetupSidebar() {
 			List<SidebarItem> rootItems = new List<SidebarItem>();
 			
-			SidebarItem downloadsRoot = new SidebarItem("DOWNLOADS");
+			SidebarItem downloadsRoot = new SidebarItem("Downloads");
 			downloadsRoot.IsHeader = true;
 			rootItems.Add(downloadsRoot);
-
-			downloadsRoot.Children.Add(new SidebarItem("All"));
+			
+			NSImage icon = new NSImage("/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/SidebarDownloadsFolder.icns");
+			icon.Size = new System.Drawing.SizeF(16f, 16f);
+			
+			downloadsRoot.Children.Add(new SidebarItem("All", icon));
+			
 			downloadsRoot.Children.Add(new SidebarItem("Downloading"));
 			downloadsRoot.Children.Add(new SidebarItem("Completed"));
 			downloadsRoot.Children.Add(new SidebarItem("Active"));
-			downloadsRoot.Children.Add(new SidebarItem("Inactive"));
 			
-			SidebarItem labelsRoot = new SidebarItem("LABELS");
+			SidebarItem i = new SidebarItem("Inactive");
+			i.Children.Add(new SidebarItem("----"));
+			downloadsRoot.Children.Add(i);
+			//downloadsRoot.Children.Add(new SidebarItem("Inactive"));
+			
+			SidebarItem labelsRoot = new SidebarItem("Labels");
 			labelsRoot.IsHeader = true;
 			rootItems.Add(labelsRoot);
 
 			labelsRoot.Children.Add(new SidebarItem("No Label"));
 			
+			NSCell cell = new NSImageAndTextCell();
+			
+			sidebar.OutlineTableColumn.DataCell = cell;
 			sidebar.DataSource = new SidebarDataSource(rootItems);
 			sidebar.Delegate = new SidebarDelegate();
 		}
