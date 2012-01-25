@@ -26,6 +26,7 @@ namespace MacLoader {
 		}
 		
 		public NSImageAndTextCell() {
+			base.LineBreakMode = NSLineBreakMode.TruncatingMiddle;
 		}
 		
 		public NSImageAndTextCell(IntPtr handle) : base (handle) {
@@ -43,6 +44,8 @@ namespace MacLoader {
 			float iconWidth = 0f;
 			float iconHeight = 0f;
 			
+			cellFrame.X = cellFrame.X - 10;
+			cellFrame.Height = cellFrame.Height - 1;
 			RectangleF newRect = cellFrame;
 			
 			if (image != null) {
@@ -52,20 +55,12 @@ namespace MacLoader {
 				iconHeight = image.Size.Height;
 				
 				image.Draw(new RectangleF(iconX, iconY, iconWidth, iconHeight), new 
-RectangleF(0, 0, iconWidth, iconHeight), NSCompositingOperation.SourceOver, 1.0f);
+RectangleF(0, 0, iconWidth, iconHeight), NSCompositingOperation.SourceOver, 1.0f, true, null);
 				
 				newRect = new RectangleF(iconX + iconWidth, cellFrame.Y, cellFrame.Width - iconX - iconWidth, cellFrame.Height - 1);
 			}
 			
-			newRect.Height = newRect.Height-1;
-			
 			base.DrawWithFrame(newRect, inView);
-		}
-
-		public override void DrawInteriorWithFrame(RectangleF cellFrame, NSView inView) {
-			
-			
-			base.DrawInteriorWithFrame(cellFrame, inView);
 		}
 	}
 }
