@@ -9,11 +9,11 @@ namespace MacLoader {
 		}
 
 		
-		public override void Resize(NSSplitView splitView, System.Drawing.SizeF oldSize) {
-			float width = splitView.Subviews[0].Bounds.Width;
-			float height = splitView.Subviews[0].Bounds.Height;
-			splitView.Subviews[0].SetBoundsSize(new SizeF(width, height));
-		}
+//		public override void Resize(NSSplitView splitView, System.Drawing.SizeF oldSize) {
+//			float width = splitView.Subviews[0].Bounds.Width;
+//			float height = splitView.Subviews[0].Bounds.Height;
+//			splitView.Subviews[0].SetBoundsSize(new SizeF(width, height));
+//		}
 	}
 }
 

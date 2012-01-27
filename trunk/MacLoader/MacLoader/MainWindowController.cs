@@ -102,6 +102,11 @@ namespace MacLoader {
 			sidebar.DataSource = new SidebarDataSource(rootItems);
 			sidebar.Delegate = new SidebarDelegate();
 			sidebar.Font = NSFont.SystemFontOfSize(NSFont.SmallSystemFontSize);
+			sidebar.FloatsGroupRows = false;
+			
+			for (int x=0; x <sidebar.RowCount; x++) {
+				sidebar.ExpandItem(sidebar.ItemAtRow(x), true);
+			}
 		}
 		
 		void downloadFilterBoxChanged(object sender, EventArgs e) {
