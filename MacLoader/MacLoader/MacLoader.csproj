@@ -37,7 +37,9 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
-    <Reference Include="MonoMac" />
+    <Reference Include="MonoMac">
+      <HintPath>lib\MonoMac.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainWindow.cs" />
@@ -54,6 +56,7 @@
     <Compile Include="DownloadListDataSource.cs" />
     <Compile Include="SplitViewDelegate.cs" />
     <Compile Include="user_interface\widget\NSImageAndTextCell.cs" />
+    <Compile Include="user_interface\widget\NSImageAndTextView.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainWindow.xib" />
