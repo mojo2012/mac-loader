@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using MonoMac.AppKit;
 using MonoMac.Foundation;
+using System.Drawing;
 
 namespace MacLoader {
 	public class SidebarDataSource : NSOutlineViewDataSource {
@@ -35,7 +36,6 @@ namespace MacLoader {
 				
 				if (sidebarItem.IsHeader) {
 					name = name.ToUpper();
-					//outlineView.ExpandItem(item,true);
 				}
 				
 				return new NSString(name);
@@ -104,10 +104,48 @@ namespace MacLoader {
 		}
 	}
 	
-	public class SidebarDelegate : NSOutlineViewDelegate {
+	public class SidebarDelegate : NSOutlineViewDelegate { //NSOutlineViewDelegate {
 		public override bool ShouldEditTableColumn(NSOutlineView outlineView, NSTableColumn tableColumn, NSObject item) {
 			return false;
 		}
+
+		//not yet implemented in the NSOutlineViewDelegate class
+		[Export ("outlineView:viewForTableColumn:item:")]
+		public NSView GetViewForItem(NSOutlineView outlineView, NSTableColumn tableColumn, NSObject item) {
+			NSView view = null;
+			SidebarItem sidebarItem = (SidebarItem)item;
+			
+			NSTextField textField = null;
+			
+			if (tableColumn != null) {
+				if (sidebarItem.Icon != null) {
+					view = outlineView.MakeView("ImageAndTextCell", this);
+					NSImageView iconView = (NSImageView)view.Subviews[0];
+					iconView.Image = sidebarItem.Icon;
+					
+					textField = (NSTextField)view.Subviews[1];
+				} else {
+					view = outlineView.MakeView("TextCell", this);
+					textField = (NSTextField)view.Subviews[0];
+				}
+					
+				textField.StringValue = sidebarItem.Name;
+			} else {
+				view = outlineView.MakeView("HeaderCell", this);
+					
+				textField = (NSTextField)view.Subviews[0];
+				textField.StringValue = sidebarItem.Name.ToUpper();
+			}
+			
+			
+			
+			return view;
+		}
+		
+//		[Export ("outlineView:dataCellForTableColumn:tableColumn:row")]
+//		public NSCell GetDataCell(NSOutlineView outlineView, NSTableColumn tableColumn, NSObject item) {
+//			return base.GetCell(outlineView, tableColumn, item);
+//		}
 
 		public override bool ShouldSelectItem(NSOutlineView outlineView, NSObject item) {
 			if (((SidebarItem)item).IsHeader) {
@@ -126,7 +164,11 @@ namespace MacLoader {
 		}
 
 		public override float GetRowHeight(NSOutlineView outlineView, NSObject item) {
-			return 21f;
+			if (((SidebarItem)item).IsHeader) {
+				return 23f;
+			}
+			
+			return 20f;
 		}
 
 		public override void WillDisplayCell(NSOutlineView outlineView, NSObject cell, NSTableColumn tableColumn, NSObject item) {

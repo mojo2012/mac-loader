@@ -12,6 +12,9 @@ namespace MacLoader
 	partial class MainWindowController
 	{
 		[Outlet]
+		MonoMac.AppKit.NSOutlineView sidebar { get; set; }
+
+		[Outlet]
 		MonoMac.AppKit.NSView downloadListView { get; set; }
 
 		[Outlet]
@@ -40,9 +43,6 @@ namespace MacLoader
 
 		[Outlet]
 		MonoMac.AppKit.NSToolbar mainWindowToolbar { get; set; }
-
-		[Outlet]
-		MonoMac.AppKit.NSOutlineView sidebar { get; set; }
 	}
 
 	[Register ("MainWindow")]
