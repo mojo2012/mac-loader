@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using MonoMac.Foundation;
 using MonoMac.AppKit;
 using System.IO;
+using MacLoader.UI;
 
 namespace MacLoader {
 	public partial class MainWindowController : MonoMac.AppKit.NSWindowController {
