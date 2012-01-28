@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using MonoMac.AppKit;
 using MonoMac.Foundation;
 using System.Drawing;
+using MacLoader.UI;
 
 namespace MacLoader {
 	public class SidebarDataSource : NSOutlineViewDataSource {

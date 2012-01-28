@@ -3,7 +3,7 @@ using MonoMac.Foundation;
 using MonoMac.AppKit;
 using System.Drawing;
 
-namespace MacLoader {
+namespace MacLoader.UI {
 	public class NSImageAndTextView : NSTextField {
 		NSImage image = null;
 
