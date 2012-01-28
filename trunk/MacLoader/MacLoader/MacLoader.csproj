@@ -78,5 +78,8 @@
     <Content Include="resources\status-downloading.png" />
     <Content Include="resources\status-paused.png" />
     <Content Include="macloader_icon.icns" />
+    <Content Include="resources\clipboard_past.png" />
+    <Content Include="resources\playback_pause.png" />
+    <Content Include="resources\playback_stop.png" />
   </ItemGroup>
 </Project>
