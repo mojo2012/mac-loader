@@ -58,6 +58,16 @@ namespace MacLoader {
 		List<SidebarItem> children = new List<SidebarItem>();
 		NSImage icon = null;
 		bool isHeader = false;
+		int badge = 0;
+
+		public int Badge {
+			get {
+				return this.badge;
+			}
+			set {
+				badge = value;
+			}
+		}
 
 		public bool IsHeader {
 			get {
@@ -116,22 +126,39 @@ namespace MacLoader {
 			SidebarItem sidebarItem = (SidebarItem)item;
 			
 			NSTextField textField = null;
+			NSButton badge = null;
 			
 			if (tableColumn != null) {
 				if (sidebarItem.Icon != null) {
-					view = outlineView.MakeView("ImageAndTextCell", this);
+					view = outlineView.MakeView("ImageTextAndBadgeView", this);
 					NSImageView iconView = (NSImageView)view.Subviews[0];
 					iconView.Image = sidebarItem.Icon;
 					
 					textField = (NSTextField)view.Subviews[1];
+					
+					badge = (NSButton)view.Subviews[2];
+					
+
+					
 				} else {
-					view = outlineView.MakeView("TextCell", this);
+					view = outlineView.MakeView("TextAndBadgeView", this);
 					textField = (NSTextField)view.Subviews[0];
+					badge = (NSButton)view.Subviews[1];
 				}
+				
+				if (badge != null) {
+					if (sidebarItem.Badge == 0) {
+						badge.Hidden = true;	
+						badge.Title = "";
+					} else {
+						badge.Hidden = false;	
+						badge.Title = sidebarItem.Badge.ToString();
+					}
+				} 
 					
 				textField.StringValue = sidebarItem.Name;
 			} else {
-				view = outlineView.MakeView("HeaderCell", this);
+				view = outlineView.MakeView("HeaderView", this);
 					
 				textField = (NSTextField)view.Subviews[0];
 				textField.StringValue = sidebarItem.Name.ToUpper();
