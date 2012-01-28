@@ -2,14 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CFBundleIconFile</key>
+	<string>macloader_icon.icns</string>
 	<key>CFBundleIdentifier</key>
 	<string>at.spot.MacLoader</string>
 	<key>CFBundleName</key>
 	<string>MacLoader</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
-	<key>Icon File</key>
-	<string>resources/macloader_icon.icns</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>10.6</string>
 	<key>NSMainNibFile</key>
