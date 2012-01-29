@@ -12,10 +12,13 @@ namespace MacLoader
 	partial class MainWindowController
 	{
 		[Outlet]
+		MonoMac.AppKit.NSTextField statusLabel { get; set; }
+
+		[Outlet]
 		MonoMac.AppKit.NSOutlineView sidebar { get; set; }
 
 		[Outlet]
-		MonoMac.AppKit.NSView downloadListView { get; set; }
+		MonoMac.AppKit.NSOutlineView downloadList { get; set; }
 
 		[Outlet]
 		MonoMac.AppKit.NSView sidebarView { get; set; }
@@ -31,9 +34,6 @@ namespace MacLoader
 
 		[Outlet]
 		MonoMac.AppKit.NSButton startDownloadButton { get; set; }
-
-		[Outlet]
-		MonoMac.AppKit.NSTableView downloadList { get; set; }
 
 		[Outlet]
 		MonoMac.AppKit.NSSearchField downloadFilterBox { get; set; }

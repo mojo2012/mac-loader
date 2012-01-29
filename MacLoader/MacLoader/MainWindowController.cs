@@ -60,8 +60,8 @@ namespace MacLoader {
 			
 			SetupSidebar();
 			
-			downloadList.DataSource = new DownloadListDataSource();
-			downloadList.Delegate = new DownloadListDelegate();
+			//downloadList.DataSource = new DownloadListDataSource();
+			//downloadList.Delegate = new DownloadListDelegate();
 			
 			splitView.Delegate = new SplitViewDelegate();
 		}
