@@ -6,7 +6,7 @@ using MonoMac.AppKit;
 using MacLoader.UI.widget;
 
 namespace MacLoader.UI.widget {
-	public class UISourceList {
+	public class UISourceList : NSOutlineViewDelegate {
 		NSOutlineView outlineView = null;
 		NSView viewContainer = null;
 		UISourceListDataSource dataSource = null;
@@ -33,9 +33,10 @@ namespace MacLoader.UI.widget {
 			this.viewContainer = outlineView.Superview;
 			this.outlineView = outlineView;
 			
+			this.outlineView.Delegate = this;
+			
 			dataSource = new UISourceListDataSource();
 			this.outlineView.DataSource = dataSource;
-			this.outlineView.Delegate = new UISourceListDelegate();
 			
 			this.outlineView.FloatsGroupRows = false;
 		}
@@ -45,6 +46,124 @@ namespace MacLoader.UI.widget {
 				outlineView.ExpandItem(outlineView.ItemAtRow(x));
 			}
 		}
+		
+		
+		#region delegate methods
+		public override bool ShouldEditTableColumn(NSOutlineView outlineView, NSTableColumn tableColumn, NSObject item) {
+			return false;
+		}
+
+		//not yet implemented in the NSOutlineViewDelegate class
+		[Export ("outlineView:viewForTableColumn:item:")]
+		public NSView GetViewForItem(NSOutlineView outlineView, NSTableColumn tableColumn, NSObject item) {
+			NSView view = null;
+			UISourceListItem sourceItem = (UISourceListItem)item;
+			
+			NSTextField textField = null;
+			NSButton badge = null;
+			
+			if (tableColumn != null) {
+				if (sourceItem.Icon != null) {
+					view = outlineView.MakeView("ImageTextAndBadgeView", this);
+					NSImageView iconView = (NSImageView)view.Subviews[0];
+					iconView.Image = sourceItem.Icon;
+					
+					textField = (NSTextField)view.Subviews[1];
+					
+					badge = (NSButton)view.Subviews[2];
+				} else {
+					view = outlineView.MakeView("TextAndBadgeView", this);
+					textField = (NSTextField)view.Subviews[0];
+					badge = (NSButton)view.Subviews[1];
+				}
+				
+				if (badge != null) {
+					if (sourceItem.Badge == -1) {
+						textField.Frame = new RectangleF(textField.Frame.Location, new SizeF(textField.Frame.Size.Width + 3 + badge.Frame.Width, textField.Frame.Size.Height));
+						badge.Hidden = true;	
+						badge.Title = "";
+						
+					} else {
+						badge.Hidden = false;	
+						badge.Title = sourceItem.Badge.ToString();
+					}
+				} 
+					
+				textField.StringValue = sourceItem.Name;
+			} else {
+				view = outlineView.MakeView("HeaderView", this);
+					
+				textField = (NSTextField)view.Subviews[0];
+				textField.StringValue = sourceItem.Name.ToUpper();
+			}
+			
+			
+			
+			return view;
+		}
+		
+		[Export ("outlineView:dataCellForTableColumn:tableColumn:row")]
+		public NSCell GetDataCell(NSOutlineView outlineView, NSTableColumn tableColumn, NSObject item) {
+			return base.GetCell(outlineView, tableColumn, item);
+		}
+
+		public override bool ShouldSelectItem(NSOutlineView outlineView, NSObject item) {
+			if (((UISourceListItem)item).IsHeader) {
+				return false;
+			} else {
+				return true;
+			}
+		}
+
+		public override bool IsGroupItem(NSOutlineView outlineView, NSObject item) {
+			if (((UISourceListItem)item).IsHeader) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		public override float GetRowHeight(NSOutlineView outlineView, NSObject item) {
+			if (((UISourceListItem)item).IsHeader) {
+				return 23f;
+			}
+			
+			return 20f;
+		}
+
+		public override void WillDisplayCell(NSOutlineView outlineView, NSObject cell, NSTableColumn tableColumn, NSObject item) {
+			UISourceListItem sourceItem = (UISourceListItem)item;
+			NSImageAndTextCell sourceCell = (NSImageAndTextCell)cell;
+			
+			sourceCell.Icon = sourceItem.Icon;
+		}
+
+		public override void SelectionDidChange(NSNotification notification) {
+//			UISourceListItem item = (UISourceListItem)outlineView.ItemAtRow(outlineView.SelectedRow);
+			
+			if (SelectionChanged != null) {
+				SelectionChanged(this, new EventArgs());
+			}
+			
+		}
+		
+		public int SelectedIndex {
+			get {
+				return outlineView.SelectedRow;	
+			}
+		}
+		
+		public UISourceListItem SelectedItem {
+			get {
+				return (UISourceListItem)outlineView.ItemAtRow(SelectedIndex);	
+			}
+		}
+		
+		
+		public delegate void SelectionChangedEventHandler(object sender,EventArgs e);
+
+		public event SelectionChangedEventHandler SelectionChanged;
+	#endregion
 	}
 	
 	class UISourceListDataSource : NSOutlineViewDataSource {
@@ -104,97 +223,6 @@ namespace MacLoader.UI.widget {
 			} else {
 				return false;
 			}
-		}
-	}
-	
-	public class UISourceListDelegate : NSOutlineViewDelegate { //NSOutlineViewDelegate {
-		public override bool ShouldEditTableColumn(NSOutlineView outlineView, NSTableColumn tableColumn, NSObject item) {
-			return false;
-		}
-
-		//not yet implemented in the NSOutlineViewDelegate class
-		[Export ("outlineView:viewForTableColumn:item:")]
-		public NSView GetViewForItem(NSOutlineView outlineView, NSTableColumn tableColumn, NSObject item) {
-			NSView view = null;
-			UISourceListItem sourceItem = (UISourceListItem)item;
-			
-			NSTextField textField = null;
-			NSButton badge = null;
-			
-			if (tableColumn != null) {
-				if (sourceItem.Icon != null) {
-					view = outlineView.MakeView("ImageTextAndBadgeView", this);
-					NSImageView iconView = (NSImageView)view.Subviews[0];
-					iconView.Image = sourceItem.Icon;
-					
-					textField = (NSTextField)view.Subviews[1];
-					
-					badge = (NSButton)view.Subviews[2];
-				} else {
-					view = outlineView.MakeView("TextAndBadgeView", this);
-					textField = (NSTextField)view.Subviews[0];
-					badge = (NSButton)view.Subviews[1];
-				}
-				
-				if (badge != null) {
-					if (sourceItem.Badge == -1) {
-						textField.Frame = new RectangleF(textField.Frame.Location, new SizeF(textField.Frame.Size.Width + 3 + badge.Frame.Width, textField.Frame.Size.Height));
-						badge.Hidden = true;	
-						badge.Title = "";
-						
-					} else {
-						badge.Hidden = false;	
-						badge.Title = sourceItem.Badge.ToString();
-					}
-				} 
-					
-				textField.StringValue = sourceItem.Name;
-			} else {
-				view = outlineView.MakeView("HeaderView", this);
-					
-				textField = (NSTextField)view.Subviews[0];
-				textField.StringValue = sourceItem.Name.ToUpper();
-			}
-			
-			
-			
-			return view;
-		}
-		
-//		[Export ("outlineView:dataCellForTableColumn:tableColumn:row")]
-//		public NSCell GetDataCell(NSOutlineView outlineView, NSTableColumn tableColumn, NSObject item) {
-//			return base.GetCell(outlineView, tableColumn, item);
-//		}
-
-		public override bool ShouldSelectItem(NSOutlineView outlineView, NSObject item) {
-			if (((UISourceListItem)item).IsHeader) {
-				return false;
-			} else {
-				return true;
-			}
-		}
-
-		public override bool IsGroupItem(NSOutlineView outlineView, NSObject item) {
-			if (((UISourceListItem)item).IsHeader) {
-				return true;
-			} else {
-				return false;
-			}
-		}
-
-		public override float GetRowHeight(NSOutlineView outlineView, NSObject item) {
-			if (((UISourceListItem)item).IsHeader) {
-				return 23f;
-			}
-			
-			return 20f;
-		}
-
-		public override void WillDisplayCell(NSOutlineView outlineView, NSObject cell, NSTableColumn tableColumn, NSObject item) {
-			UISourceListItem sourceItem = (UISourceListItem)item;
-			NSImageAndTextCell sourceCell = (NSImageAndTextCell)cell;
-			
-			sourceCell.Icon = sourceItem.Icon;
 		}
 	}
 }

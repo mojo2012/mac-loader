@@ -977,14 +977,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">mainWindow</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="748157544"/>
-					</object>
-					<int key="connectionID">104</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
 						<string key="label">mainWindowToolbar</string>
 						<reference key="source" ref="1001"/>
 						<reference key="destination" ref="803467126"/>
@@ -1025,14 +1017,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">downloadListView</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="827111976"/>
-					</object>
-					<int key="connectionID">351</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
 						<string key="label">sidebarView</string>
 						<reference key="source" ref="1001"/>
 						<reference key="destination" ref="493665437"/>
@@ -1062,6 +1046,22 @@
 						<reference key="destination" ref="888143638"/>
 					</object>
 					<int key="connectionID">574</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">downloadListView</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="827111976"/>
+					</object>
+					<int key="connectionID">577</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">mainWindow</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="748157544"/>
+					</object>
+					<int key="connectionID">578</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -2365,7 +2365,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">576</int>
+			<int key="maxID">578</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2388,6 +2388,7 @@
 							<string>addURLButton</string>
 							<string>downloadFilterBox</string>
 							<string>downloadList</string>
+							<string>downloadListView</string>
 							<string>mainWindow</string>
 							<string>mainWindowToolbar</string>
 							<string>sidebar</string>
@@ -2396,13 +2397,13 @@
 							<string>startDownloadButton</string>
 							<string>statusLabel</string>
 							<string>stopDownloadButton</string>
-							<string>templateSidebarEntry</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>NSButton</string>
 							<string>NSSearchField</string>
 							<string>NSOutlineView</string>
+							<string>NSView</string>
 							<string>MainWindow</string>
 							<string>NSToolbar</string>
 							<string>NSOutlineView</string>
@@ -2411,7 +2412,6 @@
 							<string>NSButton</string>
 							<string>NSTextField</string>
 							<string>NSButton</string>
-							<string>NSView</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -2421,6 +2421,7 @@
 							<string>addURLButton</string>
 							<string>downloadFilterBox</string>
 							<string>downloadList</string>
+							<string>downloadListView</string>
 							<string>mainWindow</string>
 							<string>mainWindowToolbar</string>
 							<string>sidebar</string>
@@ -2429,7 +2430,6 @@
 							<string>startDownloadButton</string>
 							<string>statusLabel</string>
 							<string>stopDownloadButton</string>
-							<string>templateSidebarEntry</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -2444,6 +2444,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">downloadList</string>
 								<string key="candidateClassName">NSOutlineView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">downloadListView</string>
+								<string key="candidateClassName">NSView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">mainWindow</string>
@@ -2476,10 +2480,6 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">stopDownloadButton</string>
 								<string key="candidateClassName">NSButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">templateSidebarEntry</string>
-								<string key="candidateClassName">NSView</string>
 							</object>
 						</object>
 					</object>
