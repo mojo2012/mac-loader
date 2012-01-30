@@ -34,12 +34,14 @@ namespace MacLoader {
 		
 		#endregion
 		
+		#region properties
 		//strongly typed window accessor
 		public new MainWindow Window {
 			get {
 				return (MainWindow)base.Window;
 			}
 		}
+		#endregion
 		
 		/// <summary>
 		/// User interface loaded from nib file.
