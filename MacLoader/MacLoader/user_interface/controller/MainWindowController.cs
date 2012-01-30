@@ -4,6 +4,7 @@ using MonoMac.Foundation;
 using MonoMac.AppKit;
 using System.IO;
 using MacLoader.UI;
+using MacLoader.UI.widget;
 
 namespace MacLoader {
 	public partial class MainWindowController : MonoMac.AppKit.NSWindowController {
@@ -53,23 +54,23 @@ namespace MacLoader {
 			//};
 			
 			//setup events
-			startDownloadButton.Activated += startDownloadButtonClicked;
-			stopDownloadButton.Activated += stopDownloadButtonClicked;
-			addURLButton.Activated += addURLButtonClicked;
-			downloadFilterBox.Changed += downloadFilterBoxChanged;
+			Window.startDownloadButton.Activated += startDownloadButtonClicked;
+			Window.stopDownloadButton.Activated += stopDownloadButtonClicked;
+			Window.addURLButton.Activated += addURLButtonClicked;
+			Window.downloadFilterBox.Changed += downloadFilterBoxChanged;
 			
 			SetupSidebar();
 			
 			//downloadList.DataSource = new DownloadListDataSource();
 			//downloadList.Delegate = new DownloadListDelegate();
 			
-			splitView.Delegate = new SplitViewDelegate();
+			Window.splitView.Delegate = new SplitViewDelegate();
 		}
 		
 		void SetupSidebar() {
-			List<SidebarItem> rootItems = new List<SidebarItem>();
+			List<UISourceListItem> rootItems = new List<UISourceListItem>();
 			
-			SidebarItem downloadsRoot = new SidebarItem("Downloads");
+			UISourceListItem downloadsRoot = new UISourceListItem("Downloads");
 			downloadsRoot.IsHeader = true;
 			rootItems.Add(downloadsRoot);
 			
@@ -81,33 +82,33 @@ namespace MacLoader {
 			
 			//icon.Size = new System.Drawing.SizeF(16f, 16f);
 			
-			downloadsRoot.Children.Add(new SidebarItem("All", iconAll));
+			downloadsRoot.Children.Add(new UISourceListItem("All", iconAll));
 			
-			downloadsRoot.Children.Add(new SidebarItem("Downloading", iconDownloading));
-			downloadsRoot.Children.Add(new SidebarItem("Completed", iconCompleted));
-			downloadsRoot.Children.Add(new SidebarItem("Paused", iconPaused));
+			downloadsRoot.Children.Add(new UISourceListItem("Downloading", iconDownloading));
+			downloadsRoot.Children.Add(new UISourceListItem("Completed", iconCompleted));
+			downloadsRoot.Children.Add(new UISourceListItem("Paused", iconPaused));
 			
 //			SidebarItem i = new SidebarItem("Inactive");
 //			i.Children.Add(new SidebarItem("----"));
 //			downloadsRoot.Children.Add(i);
 			
-			SidebarItem labelsRoot = new SidebarItem("Labels");
+			UISourceListItem labelsRoot = new UISourceListItem("Labels");
 			labelsRoot.IsHeader = true;
 			rootItems.Add(labelsRoot);
 
-			labelsRoot.Children.Add(new SidebarItem("No Label"));
+			labelsRoot.Children.Add(new UISourceListItem("No Label"));
 			
-			NSCell cell = new NSImageAndTextCell();
+//			NSCell cell = new NSImageAndTextCell();
 			
-			sidebar.OutlineTableColumn.DataCell = cell;
-			sidebar.DataSource = new SidebarDataSource(rootItems);
-			sidebar.Delegate = new SidebarDelegate();
-			sidebar.Font = NSFont.SystemFontOfSize(NSFont.SmallSystemFontSize);
-			sidebar.FloatsGroupRows = false;
+//			sidebar.OutlineTableColumn.DataCell = cell;
+//			sidebar.DataSource = new SidebarDataSource(rootItems);
+//			sidebar.Delegate = new SidebarDelegate();
+//			sidebar.Font = NSFont.SystemFontOfSize(NSFont.SmallSystemFontSize);
+//			sidebar.FloatsGroupRows = false;
 			
-			for (int x=0; x <sidebar.RowCount; x++) {
-				sidebar.ExpandItem(sidebar.ItemAtRow(x), true);
-			}
+			UISourceList sidebarView = new UISourceList(Window.sidebar);
+			sidebarView.Items = rootItems;
+			sidebarView.ExpandAllItems();
 		}
 		
 		void downloadFilterBoxChanged(object sender, EventArgs e) {

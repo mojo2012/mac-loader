@@ -1,15 +1,68 @@
 using System;
-using System.Collections.Generic;
-using MonoMac.AppKit;
-using MonoMac.Foundation;
 using System.Drawing;
-using MacLoader.UI;
+using System.Collections.Generic;
+using MonoMac.Foundation;
+using MonoMac.AppKit;
+using MacLoader.UI.widget;
 
-namespace MacLoader {
-	public class SidebarDataSource : NSOutlineViewDataSource {
-		List<SidebarItem> rootItems = null;
+namespace MacLoader.UI.widget {
+	public class UISourceList {
+		NSOutlineView outlineView = null;
+		NSView viewContainer = null;
+		UISourceListDataSource dataSource = null;
 		
-		public SidebarDataSource(List<SidebarItem> items) {
+		public List<UISourceListItem> Items {
+			get {
+				return dataSource.Items;
+			}
+			set {
+				dataSource.Items = value;
+				outlineView.ReloadData();
+			}
+		}		
+//		public UISourceList() {
+//			scrollViewContainer = new NSScrollView();
+//			
+//			outlineView = new NSOutlineView();
+//			outlineView.Frame = scrollViewContainer.Frame;
+//			
+//			scrollViewContainer.AddSubview(outlineView);
+//		}
+		
+		public UISourceList(NSOutlineView outlineView) {
+			this.viewContainer = outlineView.Superview;
+			this.outlineView = outlineView;
+			
+			dataSource = new UISourceListDataSource();
+			this.outlineView.DataSource = dataSource;
+			this.outlineView.Delegate = new UISourceListDelegate();
+			
+			this.outlineView.FloatsGroupRows = false;
+		}
+		
+		public void ExpandAllItems() {
+			for (int x = 0; x<outlineView.RowCount; x++) {
+				outlineView.ExpandItem(outlineView.ItemAtRow(x));
+			}
+		}
+	}
+	
+	class UISourceListDataSource : NSOutlineViewDataSource {
+		List<UISourceListItem> rootItems = null;
+
+		public List<UISourceListItem> Items {
+			get {
+				return this.rootItems;
+			}
+			set {
+				rootItems = value;
+			}
+		}
+
+		public UISourceListDataSource() : this(new List<UISourceListItem>()) {
+		}
+		
+		public UISourceListDataSource(List<UISourceListItem> items) {
 			rootItems = items;
 		}
 		
@@ -17,13 +70,13 @@ namespace MacLoader {
 			if (item == null) {
 				return rootItems.Count;
 			} else {
-				return ((SidebarItem)item).Children.Count;
+				return ((UISourceListItem)item).Children.Count;
 			}
 		}
 		
 		public override NSObject GetChild(NSOutlineView outlineView, int childIndex, NSObject ofItem) {
 			if (ofItem != null) {
-				return ((SidebarItem)ofItem).Children[childIndex];
+				return ((UISourceListItem)ofItem).Children[childIndex];
 			} else {
 				return rootItems[childIndex];
 			}
@@ -31,11 +84,11 @@ namespace MacLoader {
 
 		public override NSObject GetObjectValue(NSOutlineView outlineView, NSTableColumn tableColumn, NSObject item) {
 			if (item != null) {
-				SidebarItem sidebarItem = (SidebarItem)item;
+				UISourceListItem sourceItem = (UISourceListItem)item;
 				
-				string name = sidebarItem.Name;
+				string name = sourceItem.Name;
 				
-				if (sidebarItem.IsHeader) {
+				if (sourceItem.IsHeader) {
 					name = name.ToUpper();
 				}
 				
@@ -46,7 +99,7 @@ namespace MacLoader {
 		}
 
 		public override bool ItemExpandable(NSOutlineView outlineView, NSObject item) {
-			if (((SidebarItem)item).Children.Count > 0) {
+			if (((UISourceListItem)item).Children.Count > 0) {
 				return true;
 			} else {
 				return false;
@@ -54,68 +107,7 @@ namespace MacLoader {
 		}
 	}
 	
-	public class SidebarItem : NSObject {
-		String name = "";
-		List<SidebarItem> children = new List<SidebarItem>();
-		NSImage icon = null;
-		bool isHeader = false;
-		int badge = 0;
-
-		public int Badge {
-			get {
-				return this.badge;
-			}
-			set {
-				badge = value;
-			}
-		}
-
-		public bool IsHeader {
-			get {
-				return this.isHeader;
-			}
-			set {
-				isHeader = value;
-			}
-		}
-
-		public SidebarItem(String name) {
-			this.name = name;
-		}
-		
-		public SidebarItem(String name, NSImage icon) : this(name) {
-			this.icon = icon;
-		}
-
-		public List<SidebarItem> Children {
-			get {
-				return this.children;
-			}
-			set {
-				children = value;
-			}
-		}
-
-		public String Name {
-			get {
-				return this.name;
-			}
-			set {
-				name = value;
-			}
-		}
-
-		public NSImage Icon {
-			get {
-				return this.icon;
-			}
-			set {
-				icon = value;
-			}
-		}
-	}
-	
-	public class SidebarDelegate : NSOutlineViewDelegate { //NSOutlineViewDelegate {
+	public class UISourceListDelegate : NSOutlineViewDelegate { //NSOutlineViewDelegate {
 		public override bool ShouldEditTableColumn(NSOutlineView outlineView, NSTableColumn tableColumn, NSObject item) {
 			return false;
 		}
@@ -124,23 +116,20 @@ namespace MacLoader {
 		[Export ("outlineView:viewForTableColumn:item:")]
 		public NSView GetViewForItem(NSOutlineView outlineView, NSTableColumn tableColumn, NSObject item) {
 			NSView view = null;
-			SidebarItem sidebarItem = (SidebarItem)item;
+			UISourceListItem sourceItem = (UISourceListItem)item;
 			
 			NSTextField textField = null;
 			NSButton badge = null;
 			
 			if (tableColumn != null) {
-				if (sidebarItem.Icon != null) {
+				if (sourceItem.Icon != null) {
 					view = outlineView.MakeView("ImageTextAndBadgeView", this);
 					NSImageView iconView = (NSImageView)view.Subviews[0];
-					iconView.Image = sidebarItem.Icon;
+					iconView.Image = sourceItem.Icon;
 					
 					textField = (NSTextField)view.Subviews[1];
 					
 					badge = (NSButton)view.Subviews[2];
-					
-
-					
 				} else {
 					view = outlineView.MakeView("TextAndBadgeView", this);
 					textField = (NSTextField)view.Subviews[0];
@@ -148,21 +137,23 @@ namespace MacLoader {
 				}
 				
 				if (badge != null) {
-					if (sidebarItem.Badge == 0) {
+					if (sourceItem.Badge == -1) {
+						textField.Frame = new RectangleF(textField.Frame.Location, new SizeF(textField.Frame.Size.Width + 3 + badge.Frame.Width, textField.Frame.Size.Height));
 						badge.Hidden = true;	
 						badge.Title = "";
+						
 					} else {
 						badge.Hidden = false;	
-						badge.Title = sidebarItem.Badge.ToString();
+						badge.Title = sourceItem.Badge.ToString();
 					}
 				} 
 					
-				textField.StringValue = sidebarItem.Name;
+				textField.StringValue = sourceItem.Name;
 			} else {
 				view = outlineView.MakeView("HeaderView", this);
 					
 				textField = (NSTextField)view.Subviews[0];
-				textField.StringValue = sidebarItem.Name.ToUpper();
+				textField.StringValue = sourceItem.Name.ToUpper();
 			}
 			
 			
@@ -176,7 +167,7 @@ namespace MacLoader {
 //		}
 
 		public override bool ShouldSelectItem(NSOutlineView outlineView, NSObject item) {
-			if (((SidebarItem)item).IsHeader) {
+			if (((UISourceListItem)item).IsHeader) {
 				return false;
 			} else {
 				return true;
@@ -184,7 +175,7 @@ namespace MacLoader {
 		}
 
 		public override bool IsGroupItem(NSOutlineView outlineView, NSObject item) {
-			if (((SidebarItem)item).IsHeader) {
+			if (((UISourceListItem)item).IsHeader) {
 				return true;
 			} else {
 				return false;
@@ -192,7 +183,7 @@ namespace MacLoader {
 		}
 
 		public override float GetRowHeight(NSOutlineView outlineView, NSObject item) {
-			if (((SidebarItem)item).IsHeader) {
+			if (((UISourceListItem)item).IsHeader) {
 				return 23f;
 			}
 			
@@ -200,10 +191,10 @@ namespace MacLoader {
 		}
 
 		public override void WillDisplayCell(NSOutlineView outlineView, NSObject cell, NSTableColumn tableColumn, NSObject item) {
-			SidebarItem sidebarItem = (SidebarItem)item;
-			NSImageAndTextCell sidebarCell = (NSImageAndTextCell)cell;
+			UISourceListItem sourceItem = (UISourceListItem)item;
+			NSImageAndTextCell sourceCell = (NSImageAndTextCell)cell;
 			
-			sidebarCell.Icon = sidebarItem.Icon;
+			sourceCell.Icon = sourceItem.Icon;
 		}
 	}
 }
