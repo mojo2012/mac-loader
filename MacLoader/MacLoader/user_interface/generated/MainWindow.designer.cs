@@ -9,48 +9,44 @@ using MonoMac.Foundation;
 namespace MacLoader {
 	[Register ("MainWindow")]
 	partial class MainWindow {
-		[Outlet]
-		public MonoMac.AppKit.NSView templateSidebarEntry { get; set; }
-
-		[Outlet]
-		public MonoMac.AppKit.NSTextField statusLabel { get; set; }
-
-		[Outlet]
-		public MonoMac.AppKit.NSOutlineView sidebar { get; set; }
-
-		[Outlet]
-		public MonoMac.AppKit.NSOutlineView downloadList { get; set; }
-
-		[Outlet]
-		public MonoMac.AppKit.NSView sidebarView { get; set; }
-
-		[Outlet]
-		public MonoMac.AppKit.NSSplitView splitView { get; set; }
-
-		[Outlet]
-		public MonoMac.AppKit.NSButton stopDownloadButton { get; set; }
-
-		[Outlet]
-		public MonoMac.AppKit.NSButton addURLButton { get; set; }
-
-		[Outlet]
-		public MonoMac.AppKit.NSButton startDownloadButton { get; set; }
-
-		[Outlet]
-		public MonoMac.AppKit.NSSearchField downloadFilterBox { get; set; }
-
-		[Outlet]
-		public MacLoader.MainWindow mainWindow { get; set; }
-
-		[Outlet]
-		public MonoMac.AppKit.NSToolbar mainWindowToolbar { get; set; }
 		
 		void ReleaseDesignerOutlets() {
-			if (templateSidebarEntry != null) {
-				templateSidebarEntry.Dispose();
-				templateSidebarEntry = null;
-			}
+		}
+	}
 
+	[Register ("MainWindowController")]
+	partial class MainWindowController {
+		[Outlet]
+		MonoMac.AppKit.NSTextField statusLabel { get; set; }
+
+		[Outlet]
+		MonoMac.AppKit.NSOutlineView sidebar { get; set; }
+
+		[Outlet]
+		MonoMac.AppKit.NSOutlineView downloadList { get; set; }
+
+		[Outlet]
+		MonoMac.AppKit.NSView sidebarView { get; set; }
+
+		[Outlet]
+		MonoMac.AppKit.NSSplitView splitView { get; set; }
+
+		[Outlet]
+		MonoMac.AppKit.NSButton stopDownloadButton { get; set; }
+
+		[Outlet]
+		MonoMac.AppKit.NSButton addURLButton { get; set; }
+
+		[Outlet]
+		MonoMac.AppKit.NSButton startDownloadButton { get; set; }
+
+		[Outlet]
+		MonoMac.AppKit.NSSearchField downloadFilterBox { get; set; }
+
+		[Outlet]
+		MonoMac.AppKit.NSToolbar mainWindowToolbar { get; set; }
+		
+		void ReleaseDesignerOutlets() {
 			if (statusLabel != null) {
 				statusLabel.Dispose();
 				statusLabel = null;
@@ -96,22 +92,10 @@ namespace MacLoader {
 				downloadFilterBox = null;
 			}
 
-			if (mainWindow != null) {
-				mainWindow.Dispose();
-				mainWindow = null;
-			}
-
 			if (mainWindowToolbar != null) {
 				mainWindowToolbar.Dispose();
 				mainWindowToolbar = null;
 			}
-		}
-	}
-
-	[Register ("MainWindowController")]
-	partial class MainWindowController {
-		
-		void ReleaseDesignerOutlets() {
 		}
 	}
 }
