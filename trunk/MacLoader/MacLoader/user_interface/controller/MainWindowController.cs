@@ -54,17 +54,17 @@ namespace MacLoader {
 			//};
 			
 			//setup events
-			Window.startDownloadButton.Activated += startDownloadButtonClicked;
-			Window.stopDownloadButton.Activated += stopDownloadButtonClicked;
-			Window.addURLButton.Activated += addURLButtonClicked;
-			Window.downloadFilterBox.Changed += downloadFilterBoxChanged;
+			startDownloadButton.Activated += startDownloadButtonClicked;
+			stopDownloadButton.Activated += stopDownloadButtonClicked;
+			addURLButton.Activated += addURLButtonClicked;
+			downloadFilterBox.Changed += downloadFilterBoxChanged;
 			
 			SetupSidebar();
 			
 			//downloadList.DataSource = new DownloadListDataSource();
 			//downloadList.Delegate = new DownloadListDelegate();
 			
-			Window.splitView.Delegate = new SplitViewDelegate();
+			splitView.Delegate = new SplitViewDelegate();
 		}
 		
 		void SetupSidebar() {
@@ -106,7 +106,7 @@ namespace MacLoader {
 //			sidebar.Font = NSFont.SystemFontOfSize(NSFont.SmallSystemFontSize);
 //			sidebar.FloatsGroupRows = false;
 			
-			UISourceList sidebarView = new UISourceList(Window.sidebar);
+			UISourceList sidebarView = new UISourceList(sidebar);
 			sidebarView.Items = rootItems;
 			sidebarView.ExpandAllItems();
 		}
