@@ -50,14 +50,14 @@
     <Compile Include="user_interface\widget\NSImageAndTextView.cs" />
     <Compile Include="user_interface\widget\UISourceList.cs" />
     <Compile Include="user_interface\widget\UISourceListItem.cs" />
-    <Compile Include="user_interface\generated\MainWindow.cs" />
     <Compile Include="user_interface\generated\MainWindow.designer.cs">
-      <DependentUpon>MainWindow.cs</DependentUpon>
+      <DependentUpon>MainWindow.xib</DependentUpon>
     </Compile>
     <Compile Include="user_interface\events\UISourceListEventArgs.cs" />
     <Compile Include="controller\MainWindowController.cs" />
     <Compile Include="controller\DownloadListDataSource.cs" />
     <Compile Include="controller\SplitViewDelegate.cs" />
+    <Compile Include="user_interface\widget\MainWindow.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="user_interface\generated\MainWindow.xib" />
