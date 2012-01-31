@@ -5,6 +5,7 @@ using MonoMac.AppKit;
 using System.IO;
 using MacLoader.UI;
 using MacLoader.UI.widget;
+using MacLoader.UI.events;
 
 namespace MacLoader {
 	public partial class MainWindowController : MonoMac.AppKit.NSWindowController {
@@ -111,6 +112,12 @@ namespace MacLoader {
 			UISourceList sidebarView = new UISourceList(sidebar);
 			sidebarView.Items = rootItems;
 			sidebarView.ExpandAllItems();
+			
+			sidebarView.SelectionChanged += sidebarSelectionChanged;
+		}
+		
+		void sidebarSelectionChanged(object sender, UISourceListEventArgs e) {
+			System.Console.Out.WriteLine("sidebar: " + e.SelectedItem.Name);
 		}
 		
 		void downloadFilterBoxChanged(object sender, EventArgs e) {

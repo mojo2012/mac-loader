@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using MonoMac.Foundation;
 using MonoMac.AppKit;
 using MacLoader.UI.widget;
+using MacLoader.UI.events;
 
 namespace MacLoader.UI.widget {
 	public class UISourceList : NSOutlineViewDelegate {
@@ -78,7 +79,7 @@ namespace MacLoader.UI.widget {
 				}
 				
 				if (badge != null) {
-					if (sourceItem.Badge == -1) {
+					if (sourceItem.Badge == 0) {
 						textField.Frame = new RectangleF(textField.Frame.Location, new SizeF(textField.Frame.Size.Width + 3 + badge.Frame.Width, textField.Frame.Size.Height));
 						badge.Hidden = true;	
 						badge.Title = "";
@@ -96,8 +97,6 @@ namespace MacLoader.UI.widget {
 				textField = (NSTextField)view.Subviews[0];
 				textField.StringValue = sourceItem.Name.ToUpper();
 			}
-			
-			
 			
 			return view;
 		}
@@ -139,12 +138,9 @@ namespace MacLoader.UI.widget {
 		}
 
 		public override void SelectionDidChange(NSNotification notification) {
-//			UISourceListItem item = (UISourceListItem)outlineView.ItemAtRow(outlineView.SelectedRow);
-			
 			if (SelectionChanged != null) {
-				SelectionChanged(this, new EventArgs());
+				SelectionChanged(this, new UISourceListEventArgs(SelectedItem));
 			}
-			
 		}
 		
 		public int SelectedIndex {
@@ -159,10 +155,10 @@ namespace MacLoader.UI.widget {
 			}
 		}
 		
-		
-		public delegate void SelectionChangedEventHandler(object sender,EventArgs e);
-
 		public event SelectionChangedEventHandler SelectionChanged;
+		public delegate void SelectionChangedEventHandler(object sender,UISourceListEventArgs e);
+
+		
 	#endregion
 	}
 	
