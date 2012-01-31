@@ -54,9 +54,10 @@
     <Compile Include="user_interface\generated\MainWindow.designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="user_interface\controller\MainWindowController.cs" />
-    <Compile Include="user_interface\controller\DownloadListDataSource.cs" />
-    <Compile Include="user_interface\controller\SplitViewDelegate.cs" />
+    <Compile Include="user_interface\events\UISourceListEventArgs.cs" />
+    <Compile Include="controller\MainWindowController.cs" />
+    <Compile Include="controller\DownloadListDataSource.cs" />
+    <Compile Include="controller\SplitViewDelegate.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="user_interface\generated\MainWindow.xib" />
@@ -73,7 +74,7 @@
     <Folder Include="user_interface\" />
     <Folder Include="user_interface\widget\" />
     <Folder Include="user_interface\generated\" />
-    <Folder Include="user_interface\controller\" />
+    <Folder Include="user_interface\events\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="resources\status-completed.png" />
