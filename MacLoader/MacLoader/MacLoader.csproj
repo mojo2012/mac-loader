@@ -42,10 +42,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppDelegate.cs" />
-    <Compile Include="AppDelegate.designer.cs">
-      <DependentUpon>AppDelegate.cs</DependentUpon>
-    </Compile>
     <Compile Include="user_interface\widget\NSImageAndTextCell.cs" />
     <Compile Include="user_interface\widget\NSImageAndTextView.cs" />
     <Compile Include="user_interface\widget\UISourceList.cs" />
@@ -57,11 +53,14 @@
     <Compile Include="controller\MainWindowController.cs" />
     <Compile Include="controller\DownloadListDataSource.cs" />
     <Compile Include="controller\SplitViewDelegate.cs" />
-    <Compile Include="user_interface\widget\MainWindow.cs" />
+    <Compile Include="Main.cs" />
+    <Compile Include="user_interface\generated\MainMenu.designer.cs">
+      <DependentUpon>..\..\MainMenu.xib</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <InterfaceDefinition Include="user_interface\generated\MainWindow.xib" />
     <InterfaceDefinition Include="user_interface\generated\MainMenu.xib" />
+    <InterfaceDefinition Include="user_interface\generated\MainWindow.xib" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
