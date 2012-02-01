@@ -12,7 +12,17 @@ namespace MacLoader.UI.widget {
 		NSImage icon = null;
 		bool isHeader = false;
 		int badge = 0;
-		
+		object data = null;
+
+		public object DataObject {
+			get {
+				return this.data;
+			}
+			set {
+				data = value;
+			}
+		}
+
 		public int Badge {
 			get {
 				return this.badge;

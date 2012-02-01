@@ -33,6 +33,12 @@ namespace MacLoader {
 			mainWindowController = new MainWindowController();
 			mainWindowController.Window.MakeKeyAndOrderFront(this);
 		}
+		
+		//Shows the main window when clicked on the dock icon in case the window is not visible
+		public override bool ApplicationShouldHandleReopen(NSApplication sender, bool hasVisibleWindows) {
+			mainWindowController.Window.MakeKeyAndOrderFront(this);
+			return true;
+		}
 	}
 }
 

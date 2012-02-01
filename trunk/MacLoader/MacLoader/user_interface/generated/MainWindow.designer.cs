@@ -7,13 +7,6 @@
 using MonoMac.Foundation;
 
 namespace MacLoader {
-	[Register ("MainWindow")]
-	partial class MainWindow {
-		
-		void ReleaseDesignerOutlets() {
-		}
-	}
-
 	[Register ("MainWindowController")]
 	partial class MainWindowController {
 		[Outlet]
