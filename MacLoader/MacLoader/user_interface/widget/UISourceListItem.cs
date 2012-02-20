@@ -12,7 +12,27 @@ namespace MacLoader.UI.widget {
 		NSImage icon = null;
 		bool isHeader = false;
 		int badge = 0;
+		bool isCollapsable = true;
+		bool isExpandable = true;
 		object data = null;
+
+		public bool Collapsable {
+			get {
+				return this.isCollapsable;
+			}
+			set {
+				isCollapsable = value;
+			}
+		}
+
+		public bool Expandable {
+			get {
+				return this.isExpandable;
+			}
+			set {
+				isExpandable = value;
+			}
+		}
 
 		public object DataObject {
 			get {

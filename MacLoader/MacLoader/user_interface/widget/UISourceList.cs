@@ -8,28 +8,14 @@ using MacLoader.UI.events;
 
 namespace MacLoader.UI.widget {
 	public class UISourceList : NSOutlineViewDelegate {
+		#region fields
 		NSOutlineView outlineView = null;
 		NSView viewContainer = null;
 		UISourceListDataSource dataSource = null;
 		
-		public List<UISourceListItem> Items {
-			get {
-				return dataSource.Items;
-			}
-			set {
-				dataSource.Items = value;
-				outlineView.ReloadData();
-			}
-		}		
-//		public UISourceList() {
-//			scrollViewContainer = new NSScrollView();
-//			
-//			outlineView = new NSOutlineView();
-//			outlineView.Frame = scrollViewContainer.Frame;
-//			
-//			scrollViewContainer.AddSubview(outlineView);
-//		}
-		
+		#endregion
+	
+		#region constructors
 		public UISourceList(NSOutlineView outlineView) {
 			this.viewContainer = outlineView.Superview;
 			this.outlineView = outlineView;
@@ -40,14 +26,47 @@ namespace MacLoader.UI.widget {
 			this.outlineView.DataSource = dataSource;
 			
 			this.outlineView.FloatsGroupRows = false;
+			this.outlineView.SelectionHighlightStyle = NSTableViewSelectionHighlightStyle.SourceList;
 		}
+		#endregion
 		
+		#region public methods
 		public void ExpandAllItems() {
 			for (int x = 0; x<outlineView.RowCount; x++) {
 				outlineView.ExpandItem(outlineView.ItemAtRow(x));
 			}
 		}
+		#endregion
+
+		#region public properties
+		public List<UISourceListItem> Items {
+			get {
+				return dataSource.Items;
+			}
+			set {
+				dataSource.Items = value;
+				outlineView.ReloadData();
+			}
+		}
+				
+		public int SelectedIndex {
+			get {
+				return outlineView.SelectedRow;	
+			}
+		}
 		
+		public UISourceListItem SelectedItem {
+			get {
+				return (UISourceListItem)outlineView.ItemAtRow(SelectedIndex);	
+			}
+		}
+		#endregion
+		
+		#region private methods
+		private UISourceListItem CastItem(NSObject item) {
+			return (UISourceListItem)item;
+		}
+		#endregion
 		
 		#region delegate methods
 		public override bool ShouldEditTableColumn(NSOutlineView outlineView, NSTableColumn tableColumn, NSObject item) {
@@ -58,7 +77,7 @@ namespace MacLoader.UI.widget {
 		[Export ("outlineView:viewForTableColumn:item:")]
 		public NSView GetViewForItem(NSOutlineView outlineView, NSTableColumn tableColumn, NSObject item) {
 			NSView view = null;
-			UISourceListItem sourceItem = (UISourceListItem)item;
+			UISourceListItem sourceItem = CastItem(item);
 			
 			NSTextField textField = null;
 			NSButton badge = null;
@@ -107,7 +126,7 @@ namespace MacLoader.UI.widget {
 		}
 
 		public override bool ShouldSelectItem(NSOutlineView outlineView, NSObject item) {
-			if (((UISourceListItem)item).IsHeader) {
+			if ((CastItem(item)).IsHeader) {
 				return false;
 			} else {
 				return true;
@@ -115,7 +134,7 @@ namespace MacLoader.UI.widget {
 		}
 
 		public override bool IsGroupItem(NSOutlineView outlineView, NSObject item) {
-			if (((UISourceListItem)item).IsHeader) {
+			if ((CastItem(item)).IsHeader) {
 				return true;
 			} else {
 				return false;
@@ -123,7 +142,7 @@ namespace MacLoader.UI.widget {
 		}
 
 		public override float GetRowHeight(NSOutlineView outlineView, NSObject item) {
-			if (((UISourceListItem)item).IsHeader) {
+			if ((CastItem(item)).IsHeader) {
 				return 23f;
 			}
 			
@@ -131,7 +150,7 @@ namespace MacLoader.UI.widget {
 		}
 
 		public override void WillDisplayCell(NSOutlineView outlineView, NSObject cell, NSTableColumn tableColumn, NSObject item) {
-			UISourceListItem sourceItem = (UISourceListItem)item;
+			UISourceListItem sourceItem = CastItem(item);
 			NSImageAndTextCell sourceCell = (NSImageAndTextCell)cell;
 			
 			sourceCell.Icon = sourceItem.Icon;
@@ -142,24 +161,21 @@ namespace MacLoader.UI.widget {
 				SelectionChanged(this, new UISourceListEventArgs(SelectedItem));
 			}
 		}
-		
-		public int SelectedIndex {
-			get {
-				return outlineView.SelectedRow;	
-			}
+
+		public override bool ShouldCollapseItem(NSOutlineView outlineView, NSObject item) {
+			return (CastItem(item)).Collapsable;
 		}
-		
-		public UISourceListItem SelectedItem {
-			get {
-				return (UISourceListItem)outlineView.ItemAtRow(SelectedIndex);	
-			}
+
+		public override bool ShouldExpandItem(NSOutlineView outlineView, NSObject item) {
+			return (CastItem(item)).Expandable;
 		}
+		#endregion
 		
+		
+		#region events
 		public event SelectionChangedEventHandler SelectionChanged;
 		public delegate void SelectionChangedEventHandler(object sender,UISourceListEventArgs e);
-
-		
-	#endregion
+		#endregion
 	}
 	
 	class UISourceListDataSource : NSOutlineViewDataSource {
