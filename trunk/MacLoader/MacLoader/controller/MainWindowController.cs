@@ -103,7 +103,6 @@ namespace MacLoader {
 			UISourceList sidebarView = new UISourceList(sidebar);
 			sidebarView.Items = rootItems;
 			sidebarView.ExpandAllItems();
-			
 			sidebarView.SelectionChanged += sidebarSelectionChanged;
 		}
 		
@@ -123,8 +122,26 @@ namespace MacLoader {
 			System.Console.Out.WriteLine("stopDownloadButtonClicked");
 		}
 
+		bool addUrlPopoverVisible = false;
+		NSPopover popover = null;
+		
 		void addURLButtonClicked(object sender, EventArgs e) {
 			System.Console.Out.WriteLine("addURLButtonClicked");
+			
+			if (addUrlPopoverVisible) {
+				popover.Close();
+			} else {
+				popover = new NSPopover();
+			
+				NSViewController controller = new NSViewController();
+				controller.View = analyzeURLPopoverView;
+			
+				popover.ContentViewController = controller;
+				
+				popover.Show(addURLButton.Bounds, (NSView)sender, NSRectEdge.MaxYEdge);
+			}
+			
+			addUrlPopoverVisible = !addUrlPopoverVisible;
 		}
 	}
 }
