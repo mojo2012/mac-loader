@@ -9,9 +9,12 @@ using MacLoader.UI.events;
 
 namespace MacLoader {
 	public partial class MainWindowController : MonoMac.AppKit.NSWindowController {
-		#region Constructors
-		
+		#region fields
 		static string resourcesPath = NSBundle.MainBundle.ResourceUrl.Path;
+		UIPopover popover = null;
+		#endregion
+				
+		#region Constructors
 		
 		// Called when created from unmanaged code
 		public MainWindowController(IntPtr handle) : base (handle) {
@@ -59,6 +62,8 @@ namespace MacLoader {
 			//downloadList.Delegate = new DownloadListDelegate();
 			
 			splitView.Delegate = new SplitViewDelegate();
+			
+			popover = new UIPopover(analyzeURLPopoverView);
 		}
 		
 		void SetupSidebar() {
@@ -74,31 +79,32 @@ namespace MacLoader {
 			NSImage iconCompleted = new NSImage(Path.Combine(resourcesPath, "resources", "status-completed.png"));
 			NSImage iconPaused = new NSImage(Path.Combine(resourcesPath, "resources", "status-paused.png"));
 			
-			//icon.Size = new System.Drawing.SizeF(16f, 16f);
-			
 			downloadsRoot.Children.Add(new UISourceListItem("All", iconAll));
-			
 			downloadsRoot.Children.Add(new UISourceListItem("Downloading", iconDownloading));
 			downloadsRoot.Children.Add(new UISourceListItem("Completed", iconCompleted));
 			downloadsRoot.Children.Add(new UISourceListItem("Paused", iconPaused));
 			
-//			SidebarItem i = new SidebarItem("Inactive");
-//			i.Children.Add(new SidebarItem("----"));
-//			downloadsRoot.Children.Add(i);
+			
+			UISourceListItem linkGrabberRoot = new UISourceListItem("Link Grabber");
+			linkGrabberRoot.IsHeader = true;
+			rootItems.Add(linkGrabberRoot);
+			
+			
+			NSImage iconLinkGrabberAll = new NSImage(Path.Combine(resourcesPath, "resources", "status-offline.png"));
+			NSImage iconLinkAvailable = new NSImage(Path.Combine(resourcesPath, "resources", "status-online.png"));
+			NSImage iconLinkOffline = new NSImage(Path.Combine(resourcesPath, "resources", "status-busy.png"));
+			
+			linkGrabberRoot.Children.Add(new UISourceListItem("All", iconLinkGrabberAll));
+			linkGrabberRoot.Children.Add(new UISourceListItem("Available", iconLinkAvailable));
+			linkGrabberRoot.Children.Add(new UISourceListItem("Offline", iconLinkOffline));
+			
+			
 			
 			UISourceListItem labelsRoot = new UISourceListItem("Labels");
 			labelsRoot.IsHeader = true;
 			rootItems.Add(labelsRoot);
 
 			labelsRoot.Children.Add(new UISourceListItem("No Label"));
-			
-//			NSCell cell = new NSImageAndTextCell();
-			
-//			sidebar.OutlineTableColumn.DataCell = cell;
-//			sidebar.DataSource = new SidebarDataSource(rootItems);
-//			sidebar.Delegate = new SidebarDelegate();
-//			sidebar.Font = NSFont.SystemFontOfSize(NSFont.SmallSystemFontSize);
-//			sidebar.FloatsGroupRows = false;
 			
 			UISourceList sidebarView = new UISourceList(sidebar);
 			sidebarView.Items = rootItems;
@@ -121,27 +127,13 @@ namespace MacLoader {
 		void stopDownloadButtonClicked(object sender, EventArgs e) {
 			System.Console.Out.WriteLine("stopDownloadButtonClicked");
 		}
-
-		bool addUrlPopoverVisible = false;
-		NSPopover popover = null;
 		
 		void addURLButtonClicked(object sender, EventArgs e) {
-			System.Console.Out.WriteLine("addURLButtonClicked");
-			
-			if (addUrlPopoverVisible) {
-				popover.Close();
+			if (!popover.Shown) {
+				popover.Show(addURLButton.Bounds, (NSView)sender, NSRectEdge.MaxYEdge, true);
 			} else {
-				popover = new NSPopover();
-			
-				NSViewController controller = new NSViewController();
-				controller.View = analyzeURLPopoverView;
-			
-				popover.ContentViewController = controller;
-				
-				popover.Show(addURLButton.Bounds, (NSView)sender, NSRectEdge.MaxYEdge);
+				popover.Close();
 			}
-			
-			addUrlPopoverVisible = !addUrlPopoverVisible;
 		}
 	}
 }
