@@ -58,6 +58,7 @@
       <DependentUpon>..\..\MainMenu.xib</DependentUpon>
     </Compile>
     <Compile Include="user_interface\widget\UIPopover.cs" />
+    <Compile Include="helpers\ResourceHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="user_interface\generated\MainMenu.xib" />
@@ -84,6 +85,7 @@
     <Folder Include="user_interface\widget\" />
     <Folder Include="user_interface\generated\" />
     <Folder Include="user_interface\events\" />
+    <Folder Include="helpers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="resources\status-completed.png" />

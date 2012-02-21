@@ -6,11 +6,12 @@ using System.IO;
 using MacLoader.UI;
 using MacLoader.UI.widget;
 using MacLoader.UI.events;
+using MacLoader.Helpers;
 
 namespace MacLoader {
 	public partial class MainWindowController : MonoMac.AppKit.NSWindowController {
 		#region fields
-		static string resourcesPath = NSBundle.MainBundle.ResourceUrl.Path;
+		
 		UIPopover popover = null;
 		#endregion
 				
@@ -58,9 +59,6 @@ namespace MacLoader {
 			
 			SetupSidebar();
 			
-			//downloadList.DataSource = new DownloadListDataSource();
-			//downloadList.Delegate = new DownloadListDelegate();
-			
 			splitView.Delegate = new SplitViewDelegate();
 			
 			popover = new UIPopover(analyzeURLPopoverView);
@@ -74,10 +72,10 @@ namespace MacLoader {
 			rootItems.Add(downloadsRoot);
 			
 			
-			NSImage iconAll = new NSImage(Path.Combine(resourcesPath, "resources", "status-downloading.png"));
-			NSImage iconDownloading = new NSImage(Path.Combine(resourcesPath, "resources", "status-downloading.png"));
-			NSImage iconCompleted = new NSImage(Path.Combine(resourcesPath, "resources", "status-completed.png"));
-			NSImage iconPaused = new NSImage(Path.Combine(resourcesPath, "resources", "status-paused.png"));
+			NSImage iconAll = ResourceHelper.LoadImageFromBundle("status-downloading.png");
+			NSImage iconDownloading = ResourceHelper.LoadImageFromBundle("status-downloading.png");
+			NSImage iconCompleted = ResourceHelper.LoadImageFromBundle("status-completed.png");
+			NSImage iconPaused = ResourceHelper.LoadImageFromBundle("status-paused.png");
 			
 			downloadsRoot.Children.Add(new UISourceListItem("All", iconAll));
 			downloadsRoot.Children.Add(new UISourceListItem("Downloading", iconDownloading));
@@ -90,9 +88,9 @@ namespace MacLoader {
 			rootItems.Add(linkGrabberRoot);
 			
 			
-			NSImage iconLinkGrabberAll = new NSImage(Path.Combine(resourcesPath, "resources", "status-offline.png"));
-			NSImage iconLinkAvailable = new NSImage(Path.Combine(resourcesPath, "resources", "status-online.png"));
-			NSImage iconLinkOffline = new NSImage(Path.Combine(resourcesPath, "resources", "status-busy.png"));
+			NSImage iconLinkGrabberAll = ResourceHelper.LoadImageFromBundle("status-offline.png");
+			NSImage iconLinkAvailable = ResourceHelper.LoadImageFromBundle("status-online.png");
+			NSImage iconLinkOffline = ResourceHelper.LoadImageFromBundle("status-busy.png");
 			
 			linkGrabberRoot.Children.Add(new UISourceListItem("All", iconLinkGrabberAll));
 			linkGrabberRoot.Children.Add(new UISourceListItem("Available", iconLinkAvailable));
