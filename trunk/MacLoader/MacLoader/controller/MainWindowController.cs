@@ -88,16 +88,16 @@ namespace MacLoader {
 			rootItems.Add(linkGrabberRoot);
 			
 			
-			NSImage iconLinkGrabberAll = ResourceHelper.LoadImageFromBundle("status-offline.png");
+			NSImage iconLinkGrabberAll = ResourceHelper.LoadImageFromBundle("status-mixed.png");
 			NSImage iconLinkAvailable = ResourceHelper.LoadImageFromBundle("status-online.png");
-			NSImage iconLinkOffline = ResourceHelper.LoadImageFromBundle("status-busy.png");
+			NSImage iconLinkOffline = ResourceHelper.LoadImageFromBundle("status-not-available.png");
+			NSImage iconLinkProcessing = ResourceHelper.LoadImageFromBundle("status-processing.png");
 			
 			linkGrabberRoot.Children.Add(new UISourceListItem("All", iconLinkGrabberAll));
+			linkGrabberRoot.Children.Add(new UISourceListItem("Processing", iconLinkProcessing));
 			linkGrabberRoot.Children.Add(new UISourceListItem("Available", iconLinkAvailable));
 			linkGrabberRoot.Children.Add(new UISourceListItem("Offline", iconLinkOffline));
-			
-			
-			
+						
 			UISourceListItem labelsRoot = new UISourceListItem("Labels");
 			labelsRoot.IsHeader = true;
 			rootItems.Add(labelsRoot);
