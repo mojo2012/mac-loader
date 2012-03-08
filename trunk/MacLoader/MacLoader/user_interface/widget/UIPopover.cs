@@ -7,7 +7,7 @@ namespace MacLoader {
 	public class UIPopover : NSPopover {
 		NSView contentView = null;
 		bool closed = false;
-
+		
 		public bool Closed {
 			get {
 				return this.closed;
@@ -33,7 +33,7 @@ namespace MacLoader {
 			this.ContentViewController = new NSViewController();
 			this.ContentViewController.View = this.contentView;
 			
-			this.Delegat = new UIPopoverDelegate();
+			this.Delegate = new UIPopoverDelegate();
 			
 			this.Behavior = NSPopoverBehavior.Transient;
 		}
