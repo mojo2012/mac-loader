@@ -73,15 +73,22 @@ namespace MacLoader {
 		}
 		
 		void SetupDownloadList() {
-			List<UIOutlineViewRow> rootItems = new List<UIOutlineViewRow>();
+//			List<UIOutlineViewRow> rootItems = new List<UIOutlineViewRow>();
 			
-			UIOutlineViewRow test = new UIOutlineViewRow("Test");
-			test.Children.Add(new UIOutlineViewRow("sub-test"));
-			rootItems.Add(test);
+//			UIOutlineViewRow test = new UIOutlineViewRow("Test");
+//			test.Children.Add(new UIOutlineViewRow("sub-test"));
+//			rootItems.Add(test);
 			
 			var downloadListOutline = new UIOutlineView(this.downloadList);
+
+			downloadListOutline.Columns.Add(new UIOutlineViewTextColumn());
+			downloadListOutline.Columns.Add(new UIOutlineViewImageColumn());
+			downloadListOutline.Columns.Add(new UIOutlineViewTextColumn());
+			downloadListOutline.Columns.Add(new UIOutlineProgressBarColumn());
+
+
 			
-			downloadListOutline.Rows = rootItems;
+//			downloadListOutline.Rows = rootItems;
 //			downloadListOutline.ExpandAllRows();
 //			downloadListOutline.SelectionChanged += sidebarSelectionChanged;
 		}

@@ -84,6 +84,8 @@
     <Compile Include="user_interface\widget\UISourceListItem.cs" />
     <Compile Include="user_interface\events\UISourceListEventArgs.cs" />
     <Compile Include="Main.cs" />
+    <Compile Include="user_interface\widget\UIOutlineViewColumns.cs" />
+    <Compile Include="user_interface\widget\UIOutlineViewCells.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="user_interface\generated\MainMenu.xib" />
