@@ -31,6 +31,10 @@ namespace MacLoader {
 		int columnIndex = -1;
 
 		#region constructor
+		public UIOutlineViewColumn() {
+			this.columnName = "Column";
+		}
+
 		public UIOutlineViewColumn(string columnName) {
 			this.columnName = columnName;
 		}
@@ -63,11 +67,16 @@ namespace MacLoader {
 			get {
 				return columnIndex;
 			}
+			set {
+				this.columnIndex = value;
+			}
 		}
 		#endregion
 	}
 	
 	public class UIOutlineViewTextColumn : UIOutlineViewColumn {
+		public UIOutlineViewTextColumn(string columnName) : base(columnName) { }
+
 		public override NSView CellTemplate {
 			get {
 				return new UIOutlineViewTextCell();
@@ -76,6 +85,8 @@ namespace MacLoader {
 	}
 	
 	public class UIOutlineViewImageColumn : UIOutlineViewColumn {
+		public UIOutlineViewImageColumn(string columnName) : base(columnName) { }
+
 		public override NSView CellTemplate {
 			get {
 				return new UIOutlineViewImageCell();
@@ -84,6 +95,8 @@ namespace MacLoader {
 	}
 
 	public class UIOutlineProgressBarColumn : UIOutlineViewColumn {
+		public UIOutlineProgressBarColumn(string columnName) : base(columnName) { }
+
 		public override NSView CellTemplate {
 			get {
 				return new UIOutlineViewProgressCell();

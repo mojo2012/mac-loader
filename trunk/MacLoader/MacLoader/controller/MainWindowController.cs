@@ -81,12 +81,13 @@ namespace MacLoader {
 			
 			var downloadListOutline = new UIOutlineView(this.downloadList);
 
-			downloadListOutline.Columns.Add(new UIOutlineViewTextColumn());
-			downloadListOutline.Columns.Add(new UIOutlineViewImageColumn());
-			downloadListOutline.Columns.Add(new UIOutlineViewTextColumn());
-			downloadListOutline.Columns.Add(new UIOutlineProgressBarColumn());
+			downloadListOutline.AddColumn(new UIOutlineViewTextColumn("File a name"));
+			downloadListOutline.AddColumn(new UIOutlineViewImageColumn("Hoster"));
+			downloadListOutline.AddColumn(new UIOutlineViewTextColumn("Speed"));
+			downloadListOutline.AddColumn(new UIOutlineProgressBarColumn("Progress"));
 
-
+			downloadListOutline.Rows.Add(new UIOutlineViewRow());
+//			downloadListOutline.Reload();
 			
 //			downloadListOutline.Rows = rootItems;
 //			downloadListOutline.ExpandAllRows();
