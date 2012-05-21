@@ -6,9 +6,11 @@
 //
 using MonoMac.Foundation;
 
-namespace MacLoader {
+namespace MacLoader
+{
 	[Register ("MainWindowController")]
-	partial class MainWindowController {
+	partial class MainWindowController
+	{
 		[Outlet]
 		MonoMac.AppKit.NSTextField statusLabel { get; set; }
 
@@ -34,6 +36,9 @@ namespace MacLoader {
 		MonoMac.AppKit.NSButton startDownloadButton { get; set; }
 
 		[Outlet]
+		MonoMac.AppKit.NSButton observeClipboard { get; set; }
+
+		[Outlet]
 		MonoMac.AppKit.NSSearchField downloadFilterBox { get; set; }
 
 		[Outlet]
@@ -45,72 +50,72 @@ namespace MacLoader {
 		[Outlet]
 		MonoMac.AppKit.NSPopover analyzeURLPopover { get; set; }
 		
-		void ReleaseDesignerOutlets() {
+		void ReleaseDesignerOutlets ()
+		{
 			if (statusLabel != null) {
-				statusLabel.Dispose();
+				statusLabel.Dispose ();
 				statusLabel = null;
 			}
 
 			if (sidebar != null) {
-				sidebar.Dispose();
+				sidebar.Dispose ();
 				sidebar = null;
 			}
 
 			if (downloadList != null) {
-				downloadList.Dispose();
+				downloadList.Dispose ();
 				downloadList = null;
 			}
 
 			if (sidebarView != null) {
-				sidebarView.Dispose();
+				sidebarView.Dispose ();
 				sidebarView = null;
 			}
 
 			if (splitView != null) {
-				splitView.Dispose();
+				splitView.Dispose ();
 				splitView = null;
 			}
 
 			if (stopDownloadButton != null) {
-				stopDownloadButton.Dispose();
+				stopDownloadButton.Dispose ();
 				stopDownloadButton = null;
 			}
 
 			if (addURLButton != null) {
-				addURLButton.Dispose();
+				addURLButton.Dispose ();
 				addURLButton = null;
 			}
 
 			if (startDownloadButton != null) {
-				startDownloadButton.Dispose();
+				startDownloadButton.Dispose ();
 				startDownloadButton = null;
 			}
 
+			if (observeClipboard != null) {
+				observeClipboard.Dispose ();
+				observeClipboard = null;
+			}
+
 			if (downloadFilterBox != null) {
-				downloadFilterBox.Dispose();
+				downloadFilterBox.Dispose ();
 				downloadFilterBox = null;
 			}
 
 			if (mainWindowToolbar != null) {
-				mainWindowToolbar.Dispose();
+				mainWindowToolbar.Dispose ();
 				mainWindowToolbar = null;
 			}
 
 			if (analyzeURLPopoverView != null) {
-				analyzeURLPopoverView.Dispose();
+				analyzeURLPopoverView.Dispose ();
 				analyzeURLPopoverView = null;
 			}
 
 			if (analyzeURLPopover != null) {
-				analyzeURLPopover.Dispose();
+				analyzeURLPopover.Dispose ();
 				analyzeURLPopover = null;
 			}
 		}
-		
-
-	}
-	
-	[Register ("AnalyzeURLPopoverController")]
-	partial class AnalyzeURLPopoverController {
 	}
 }
