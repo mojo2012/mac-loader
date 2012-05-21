@@ -50,18 +50,40 @@ namespace MacLoader {
 			//downloadFilterBox.Changed += (sender, e) => {
 				
 			//};
+
+			observeClipboard.Image = ResourceHelper.LoadImageFromBundle("toolbar_clipboard.png");
+			startDownloadButton.Image = ResourceHelper.LoadImageFromBundle("toolbar_start.png");
+			stopDownloadButton.Image = ResourceHelper.LoadImageFromBundle("toolbar_stop.png");
+			addURLButton.Image = ResourceHelper.LoadImageFromBundle("toolbar_add.png");
 			
 			//setup events
 			startDownloadButton.Activated += startDownloadButtonClicked;
 			stopDownloadButton.Activated += stopDownloadButtonClicked;
 			addURLButton.Activated += addURLButtonClicked;
+			observeClipboard.Activated += observeClipboardClicked;
 			downloadFilterBox.Changed += downloadFilterBoxChanged;
 			
 			SetupSidebar();
 			
 			splitView.Delegate = new SplitViewDelegate();
 			
+			SetupDownloadList();
+			
 			popover = new UIPopover(analyzeURLPopoverView);
+		}
+		
+		void SetupDownloadList() {
+			List<UIOutlineViewRow> rootItems = new List<UIOutlineViewRow>();
+			
+			UIOutlineViewRow test = new UIOutlineViewRow("Test");
+			test.Children.Add(new UIOutlineViewRow("sub-test"));
+			rootItems.Add(test);
+			
+			var downloadListOutline = new UIOutlineView(this.downloadList);
+			
+			downloadListOutline.Rows = rootItems;
+//			downloadListOutline.ExpandAllRows();
+//			downloadListOutline.SelectionChanged += sidebarSelectionChanged;
 		}
 		
 		void SetupSidebar() {
@@ -132,6 +154,10 @@ namespace MacLoader {
 			} else {
 				popover.Close();
 			}
+		}
+		
+		void observeClipboardClicked(object sender, EventArgs e) {
+			System.Console.Out.WriteLine("observeClipboardClicked, state=" + ((NSButton)sender).State);
 		}
 	}
 }

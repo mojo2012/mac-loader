@@ -4,14 +4,22 @@
 <dict>
 	<key>CFBundleIconFile</key>
 	<string>macloader_icon.icns</string>
+	<key>CFBundleIconFiles</key>
+	<array>
+		<string>macloader_icon.icns</string>
+	</array>
 	<key>CFBundleIdentifier</key>
 	<string>at.spot.MacLoader</string>
 	<key>CFBundleName</key>
 	<string>MacLoader</string>
+	<key>CFBundleShortVersionString</key>
+	<string>0.1</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.utilities</string>
 	<key>LSMinimumSystemVersion</key>
-	<string>10.6</string>
+	<string>10.7</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
