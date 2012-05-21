@@ -15,8 +15,16 @@ namespace MacLoader.UI.widget {
 		#region fields
 		NSOutlineView outlineView = null;
 		UIOutlineViewDataSource dataSource = null;
-		List<IUIOutlineViewColumn> columns = new List<IUIOutlineViewColumn>();
-		
+//		List<IUIOutlineViewColumn> columns = new List<IUIOutlineViewColumn>();
+
+		bool uninitialized = true;
+
+		enum UIOutlineViewColumnType {
+			TextColumn,
+			ImageColumn,
+			ProgressBarColumn,
+		}
+
 		#endregion
 	
 		#region constructors
@@ -29,6 +37,13 @@ namespace MacLoader.UI.widget {
 			this.outlineView.DataSource = dataSource;
 			
 			this.outlineView.FloatsGroupRows = true;
+
+			//delete all columsn defined in Interface Builder
+			foreach (var column in outlineView.TableColumns()) {
+				System.Console.WriteLine("column deleted:");
+
+				this.outlineView.RemoveColumn(column);
+			}
 		}
 		#endregion
 		
@@ -38,6 +53,10 @@ namespace MacLoader.UI.widget {
 				outlineView.ExpandItem(outlineView.ItemAtRow(x));
 			}
 		}
+
+		public void Reload() {
+			outlineView.ReloadData();
+		}
 		#endregion
 
 		#region public properties
@@ -45,19 +64,51 @@ namespace MacLoader.UI.widget {
 			get {
 				return dataSource.Items;
 			}
-			set {
-				dataSource.Items = value;
-				outlineView.ReloadData();
+//			set {
+//				dataSource.Items = value;
+//
+//				outlineView.ReloadData();
+//			}
+		}
+
+		public void AddColumn(UIOutlineViewColumn column) {
+			column.ColumnIndex = this.outlineView.ColumnCount;
+
+//			this.columns.Add(column);
+			this.outlineView.AddColumn(column);
+
+
+			if (uninitialized & this.outlineView.ColumnCount == 2) {
+				uninitialized = false;
+				this.outlineView.RemoveColumn(this.outlineView.TableColumns()[0]);
 			}
 		}
 
-		public List<IUIOutlineViewColumn> Columns {
+		public void RemoveColumn(UIOutlineViewColumn column) {
+//			this.columns.Remove(column);
+			this.outlineView.RemoveColumn(column);
+		}
+
+		public List<UIOutlineViewColumn> Columns {
 			get {
-				return this.columns;
+				if (!uninitialized) {
+					var castTmpCols = new List<UIOutlineViewColumn>();
+
+					try {
+						foreach (var col in this.outlineView.TableColumns()) {
+							castTmpCols.Add((UIOutlineViewColumn)col);
+						}
+					} catch (Exception ex) {
+						System.Console.WriteLine(ex.Message);
+					}
+
+				}
+
+				return new List<UIOutlineViewColumn>();
 			}
-			set {
-				columns = value;
-			}
+//			set {
+//				columns = value;
+//			}
 		}
 
 		public int SelectedIndex {
@@ -88,19 +139,12 @@ namespace MacLoader.UI.widget {
 		[Export ("outlineView:viewForTableColumn:item:")]
 		public NSView GetViewForItem(NSOutlineView outlineView, NSTableColumn tableColumn, NSObject item) {
 			UIOutlineViewRow sourceItem = CastItem(item);
-			
-//			NSTextField textField = new NSTextField();
-//			textField.StringValue = sourceItem.Name;
-//			textField.Editable = false;
-//			textField.Bordered = false;
-//			
-//			textField.DrawsBackground = false;
-			
+
 			NSView view = outlineView.MakeView(
 				(string)tableColumn.Identifier.ToString(),
 				this
 			);
-//			NSProgressIndicator view = new NSProgressIndicator();
+
 			return view;
 		}
 		

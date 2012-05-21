@@ -24,9 +24,9 @@ namespace MacLoader.UI.widget {
 
 		}
 		
-		public UIOutlineViewRow(String name, NSImage icon) : this() {
-			this.icon = icon;
-		}
+//		public UIOutlineViewRow(String name, NSImage icon) : this() {
+//			this.icon = icon;
+//		}
 		#endregion
 
 
