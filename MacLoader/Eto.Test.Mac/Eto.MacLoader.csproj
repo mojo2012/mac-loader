@@ -60,8 +60,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MacLoaderForm.cs" />
     <Compile Include="MacLoaderApplication.cs" />
+    <Compile Include="ui\MacLoaderForm.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -70,6 +70,7 @@
   <Import Project="$(MSBuildExtensionsPath)\Mono\MonoMac\v0.0\Mono.MonoMac.targets" />
   <ItemGroup>
     <Folder Include="res\" />
+    <Folder Include="ui\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="res\macloader_icon.icns" />
