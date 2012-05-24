@@ -4,6 +4,7 @@ using Eto.Drawing;
 using MonoMac.Foundation;
 using MonoMac.AppKit;
 using MonoMac.ObjCRuntime;
+using MacLoader.Helpers;
 
 namespace Eto.MacLoader {
 	public class MacLoaderForm : Form {
@@ -24,67 +25,48 @@ namespace Eto.MacLoader {
 
 		void GenerateActions() {
 			var actions = new GenerateActionArgs(this);
-				
+
+			var icon = ResourceHelper.LoadIconFromBundle("toolbar_start.png");
+			ButtonAction startDownloadsTB = new ButtonAction(
+				"tb_start_downloads",
+				"Start",
+				icon,
+				new EventHandler<EventArgs>(startDownloadsTB_Clicked)
+			);
+
+			startDownloadsTB.MenuText = "Start downloading";
+			startDownloadsTB.ToolBarText = "Start downloading";
+			startDownloadsTB.TooltipText = "Starts downloading all files.";
+
 			// define action
-			actions.Actions.Add(new MyAction());
+			actions.Actions.Add(startDownloadsTB);
+
+
 
 			// add action to toolbar
-			actions.ToolBar.Add(MyAction.ActionID);
+			actions.ToolBar.Add(startDownloadsTB.ID);
 			
 			// add action to file sub-menu
 			var file = actions.Menu.FindAddSubMenu("&File");
-			file.Actions.Add(MyAction.ActionID);
+			file.Actions.Add(startDownloadsTB.ID);
 			
 			// generate menu & toolbar
-
 			this.Menu = actions.Menu.GenerateMenuBar();
-			
 			this.ToolBar = actions.ToolBar.GenerateToolBar();
 		}
 
-		public class MyAction : ButtonAction {
-			public const string ActionID = "my_action";
-		
-			public MyAction() {
-				this.ID = ActionID;
-				this.MenuText = "C&lick Me";
-				this.ToolBarText = "Click Me";
-				this.TooltipText = "This shows a dialog for no reason";
-				this.Accelerator = Application.Instance.CommonModifier | Key.M;  // control+M or cmd+M
-			}
-		
-			protected override void OnActivated(EventArgs e) {
-				base.OnActivated(e);
-			
-				MessageBox.Show(
+
+
+		#region event handling
+		protected void startDownloadsTB_Clicked(object sender, EventArgs e) {
+			MessageBox.Show(
 					Application.Instance.MainForm,
 					"You clicked me!",
 					"Tutorial 2",
 					MessageBoxButtons.OK
-				);
-			}
+			);
 		}
 
-		static void AddStyles() {
-			// support full screen mode!
-			Eto.Style.Add<Window, NSWindow>("main", (widget, control) => {
-				control.CollectionBehavior |= NSWindowCollectionBehavior.FullScreenPrimary;
-			}
-			);
-			
-			Eto.Style.Add<Application, NSApplication>("application", (widget, control) => {
-				if (control.RespondsToSelector(new Selector("presentationOptions:"))) {
-					control.PresentationOptions |= NSApplicationPresentationOptions.FullScreen;
-				}
-			}
-			);
-
-			// other styles
-//			Eto.Style.AddHandler<TreeGridViewHandler>("sectionList", (handler) => {
-//				handler.ScrollView.BorderType = NSBorderType.NoBorder;
-//				handler.Control.SelectionHighlightStyle = NSTableViewSelectionHighlightStyle.SourceList;
-//			}
-//			);
-		}
+		#endregion
 	}
 }
