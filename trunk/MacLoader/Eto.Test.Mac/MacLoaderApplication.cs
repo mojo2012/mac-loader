@@ -37,6 +37,8 @@ namespace Eto.MacLoader {
 		}
 	}
 
+
+	//Entry point for application startup
 	public class Startup {
 		public static void Main(string[] args) {
 			AddStyles();
