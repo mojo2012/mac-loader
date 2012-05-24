@@ -73,6 +73,6 @@
     <Folder Include="ui\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="res\macloader_icon.icns" />
+    <Content Include="macloader_icon.icns" />
   </ItemGroup>
 </Project>
