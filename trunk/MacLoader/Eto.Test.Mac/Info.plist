@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleIconFile</key>
-	<string>res/macloader_icon.icns</string>
+	<string>macloader_icon.icns</string>
 	<key>CFBundleIconFiles</key>
 	<array>
 		<string>res/macloader_icon.icns</string>
