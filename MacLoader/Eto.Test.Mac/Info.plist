@@ -6,12 +6,12 @@
 	<string>macloader_icon.icns</string>
 	<key>CFBundleIconFiles</key>
 	<array>
-		<string>res/macloader_icon.icns</string>
+		<string>macloader_icon.icns</string>
 	</array>
 	<key>CFBundleIdentifier</key>
 	<string>at.spot.MacLoader</string>
 	<key>CFBundleName</key>
-	<string>Eto.Test.Mac</string>
+	<string>MacLoader</string>
 	<key>CFBundleShortVersionString</key>
 	<string>0.1</string>
 	<key>CFBundleVersion</key>

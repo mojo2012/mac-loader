@@ -8,8 +8,8 @@
     <ProjectGuid>{57BCCF63-1D05-4AD6-9BBB-E2CE4E2451AB}</ProjectGuid>
     <ProjectTypeGuids>{948B3504-5B70-4649-8FE4-BDE1FB46EC69};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Eto.Test.Mac</RootNamespace>
-    <AssemblyName>Eto.Test.Mac</AssemblyName>
+    <RootNamespace>Eto.MacLoader</RootNamespace>
+    <AssemblyName>MacLoader</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -24,6 +24,8 @@
     <CreatePackage>false</CreatePackage>
     <EnablePackageSigning>false</EnablePackageSigning>
     <IncludeMonoRuntime>false</IncludeMonoRuntime>
+    <CodeSigningKey>Mac Developer</CodeSigningKey>
+    <PackageSigningKey>3rd Party Mac Developer Installer</PackageSigningKey>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -62,6 +64,7 @@
   <ItemGroup>
     <Compile Include="MacLoaderApplication.cs" />
     <Compile Include="ui\MacLoaderForm.cs" />
+    <Compile Include="res\ResourceHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -71,8 +74,10 @@
   <ItemGroup>
     <Folder Include="res\" />
     <Folder Include="ui\" />
+    <Folder Include="helpers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="macloader_icon.icns" />
+    <Content Include="res\toolbar_start.png" />
   </ItemGroup>
 </Project>
