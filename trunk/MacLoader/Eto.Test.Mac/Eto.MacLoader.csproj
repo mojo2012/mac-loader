@@ -64,11 +64,25 @@
     <Folder Include="res\" />
     <Folder Include="ui\" />
     <Folder Include="helpers\" />
+    <Folder Include="resources\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="macloader_icon.icns" />
-    <Content Include="res\toolbar_start.png" />
-    <Content Include="res\toolbar_speed_limit.png" />
+    <Content Include="resources\toolbar_speed_limit.png" />
+    <Content Include="resources\toolbar_start.png" />
+    <Content Include="resources\macloader_icon.png" />
+    <Content Include="resources\toolbar_stop.png" />
+    <Content Include="resources\toolbar_clipboard.png" />
+    <Content Include="resources\toolbar_add.png" />
+    <Content Include="resources\status-processing.png" />
+    <Content Include="resources\status-busy.png" />
+    <Content Include="resources\status-completed.png" />
+    <Content Include="resources\status-downloading.png" />
+    <Content Include="resources\status-mixed.png" />
+    <Content Include="resources\status-not-available.png" />
+    <Content Include="resources\status-offline.png" />
+    <Content Include="resources\status-online.png" />
+    <Content Include="resources\status-paused.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Eto\Source\Eto\Eto.csproj">
