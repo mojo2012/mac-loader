@@ -101,22 +101,37 @@ namespace Eto.MacLoader {
                 "Limit download speed",
                 icon,
                 new EventHandler<EventArgs>(tbThrottleDownloads_Clicked)
-                );
+            );
             
             limitDownloadSpeedDownloadsTB.ToolBarText = "Limit speed";
             limitDownloadSpeedDownloadsTB.TooltipText = "Limit download speed";
             limitDownloadSpeedDownloadsTB.ToolBarItemStyle = "toolbarItemBezel";
 
-            // define action
-            args.Actions.Add(startDownloadsTB);
-            args.Actions.Add(limitDownloadSpeedDownloadsTB);
+            //add link
+            icon = ResourceHelper.LoadIconFromBundle("toolbar_add.png");
+            ButtonAction addURLTB = new ButtonAction(
+                "tb_add_url",
+                "Add URL",
+                icon,
+                new EventHandler<EventArgs>(tbAddURL_Clicked)
+            );
+            
+            addURLTB.ToolBarText = "Add URL";
+            addURLTB.TooltipText = "Add URL to download";
+            addURLTB.ToolBarItemStyle = "toolbarItemBezel";
 
-            // add action to toolbar
-            args.ToolBar.Add(startDownloadsTB.ID);
-            args.ToolBar.Add(limitDownloadSpeedDownloadsTB.ID);
+            // add action
+            addAction(args, startDownloadsTB);
+            addAction(args, limitDownloadSpeedDownloadsTB);
+            addAction(args, addURLTB);
 
             this.ToolBar = args.ToolBar.GenerateToolBar();
             this.ToolBar.Style = "toolbar";
+        }
+
+        private void addAction(GenerateActionArgs args, Eto.Forms.BaseAction action) {
+            args.Actions.Add(action);
+            args.ToolBar.Add(action.ID);
         }
     }
 }

@@ -20,6 +20,10 @@ namespace Eto.MacLoader {
 
         }
 
+        protected void tbAddURL_Clicked(object sender, EventArgs e) {
+            
+        }
+
         protected void mainForm_KeyDown(object sender, EventArgs e) {
             this.Close();
         }
