@@ -12,32 +12,32 @@
     <AssemblyName>MacLoader</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
+    <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>False</Optimize>
     <OutputPath>bin\Debug</OutputPath>
     <DefineConstants>DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
-    <EnableCodeSigning>false</EnableCodeSigning>
-    <CreatePackage>false</CreatePackage>
-    <EnablePackageSigning>false</EnablePackageSigning>
-    <IncludeMonoRuntime>false</IncludeMonoRuntime>
+    <ConsolePause>False</ConsolePause>
+    <EnableCodeSigning>False</EnableCodeSigning>
+    <CreatePackage>False</CreatePackage>
+    <EnablePackageSigning>False</EnablePackageSigning>
+    <IncludeMonoRuntime>False</IncludeMonoRuntime>
     <CodeSigningKey>Mac Developer</CodeSigningKey>
     <PackageSigningKey>3rd Party Mac Developer Installer</PackageSigningKey>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>False</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
-    <EnableCodeSigning>false</EnableCodeSigning>
-    <CreatePackage>false</CreatePackage>
-    <EnablePackageSigning>false</EnablePackageSigning>
-    <IncludeMonoRuntime>false</IncludeMonoRuntime>
+    <ConsolePause>False</ConsolePause>
+    <EnableCodeSigning>False</EnableCodeSigning>
+    <CreatePackage>False</CreatePackage>
+    <EnablePackageSigning>False</EnablePackageSigning>
+    <IncludeMonoRuntime>False</IncludeMonoRuntime>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -48,23 +48,12 @@
     <Reference Include="MonoMac, Version=0.0.0.0, Culture=neutral">
       <Private>False</Private>
     </Reference>
-    <Reference Include="Eto">
-      <HintPath>lib\Eto.dll</HintPath>
-    </Reference>
-    <Reference Include="Eto.Platform.Gtk">
-      <HintPath>lib\Eto.Platform.Gtk.dll</HintPath>
-    </Reference>
-    <Reference Include="Eto.Platform.Mac">
-      <HintPath>lib\Eto.Platform.Mac.dll</HintPath>
-    </Reference>
-    <Reference Include="Eto.Platform.Windows">
-      <HintPath>lib\Eto.Platform.Windows.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MacLoaderApplication.cs" />
     <Compile Include="ui\MacLoaderForm.cs" />
     <Compile Include="res\ResourceHelper.cs" />
+    <Compile Include="ui\MacLoaderForm.designer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -79,5 +68,27 @@
   <ItemGroup>
     <Content Include="macloader_icon.icns" />
     <Content Include="res\toolbar_start.png" />
+    <Content Include="res\toolbar_speed_limit.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Eto\Source\Eto\Eto.csproj">
+      <Project>{16289D2F-044C-49EF-83E9-9391AFF8FD2B}</Project>
+      <Name>Eto</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Eto\Source\Eto.Platform.Mac\Eto.Platform.Mac.csproj">
+      <Project>{9DD10DFF-5AB3-4E66-B798-CA17911A61E4}</Project>
+      <Name>Eto.Platform.Mac</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ProjectExtensions>
+    <MonoDevelop>
+      <Properties>
+        <Policies>
+          <TextStylePolicy inheritsSet="VisualStudio" inheritsScope="text/plain" scope="text/x-csharp" />
+          <CSharpFormattingPolicy IndentSwitchBody="True" NamespaceBraceStyle="EndOfLine" ClassBraceStyle="EndOfLine" InterfaceBraceStyle="EndOfLine" StructBraceStyle="EndOfLine" EnumBraceStyle="EndOfLine" MethodBraceStyle="EndOfLine" ConstructorBraceStyle="EndOfLine" DestructorBraceStyle="EndOfLine" ArrayInitializerBraceStyle="NextLine" BeforeMethodDeclarationParentheses="False" BeforeMethodCallParentheses="False" BeforeConstructorDeclarationParentheses="False" BeforeDelegateDeclarationParentheses="False" NewParentheses="False" inheritsSet="Mono" inheritsScope="text/x-csharp" scope="text/x-csharp" />
+          <TextStylePolicy FileWidth="120" TabWidth="3" IndentWidth="4" inheritsSet="Mono" inheritsScope="text/plain" scope="text/plain" />
+        </Policies>
+      </Properties>
+    </MonoDevelop>
+  </ProjectExtensions>
 </Project>
