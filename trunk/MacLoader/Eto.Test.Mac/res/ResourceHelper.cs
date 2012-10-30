@@ -9,11 +9,11 @@ namespace MacLoader.Helpers {
 		static string resourcesPath = NSBundle.MainBundle.ResourceUrl.Path;
 		
 		public static NSImage LoadImageFromBundle(String fileName) {
-			return new NSImage(Path.Combine(resourcesPath, "res", fileName));
+			return new NSImage(Path.Combine(resourcesPath, "resources", fileName));
 		}
 
 		public static Icon LoadIconFromBundle(String fileName) {
-			return new Icon(Path.Combine(resourcesPath, "res", fileName));
+            return new Icon(Path.Combine(resourcesPath, "resources", fileName));
 		}
 	}
 }
