@@ -77,9 +77,10 @@ namespace Eto.MacLoader {
             });
 
             // other styles
-            Style.Add<TreeGridViewHandler>("sectionList", handler => {
+            Style.Add<TreeGridViewHandler>("sidebar", handler => {
                 handler.ScrollView.BorderType = NSBorderType.NoBorder;
                 handler.Control.SelectionHighlightStyle = NSTableViewSelectionHighlightStyle.SourceList;
+                handler.ShowHeader = false;
             });
         }
     }

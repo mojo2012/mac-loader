@@ -23,10 +23,30 @@ namespace Eto.MacLoader {
             this.Title = "MacLoader";
             this.Style = "mainWindow";
 
+            //menus and toolbar
             GenerateActions();
 
+            //main form
+            GenerateWindowContent();
+
             //events
-            this.KeyDown += mainForm_KeyDown;
+
+        }
+
+        void GenerateWindowContent() {
+            Splitter contentSplittler = new Splitter();
+            this.AddDockedControl(contentSplittler);
+
+            contentSplittler.FixedPanel = SplitterFixedPanel.Panel1;
+            contentSplittler.Position = 160;
+
+            Eto.Forms.TreeGridView sidebar = new Eto.Forms.TreeGridView();
+            sidebar.Style = "sidebar";
+//            list..Add(new ListItem { Text="TEST" });
+
+//            sidebar.DataStore = new Grid
+//
+//            contentSplittler.Panel1 = sidebar;
         }
 
         void GenerateActions() {
@@ -44,9 +64,9 @@ namespace Eto.MacLoader {
 
         void GenerateMenus(GenerateActionArgs args) {
             var main = args.Menu.FindAddSubMenu("MacLoader", 1);
-            var file = args.Menu.AddSubMenu("&File", 100);
+            var file = args.Menu.FindAddSubMenu("&File", 100);
             var edit = args.Menu.FindAddSubMenu("&Edit", 200);
-            var window = args.Menu.AddSubMenu("&Window", 900);
+            var window = args.Menu.FindAddSubMenu("&Window", 900);
             var help = args.Menu.FindAddSubMenu("Help", 1000);
 
             if (Generator.ID == "mac") {
