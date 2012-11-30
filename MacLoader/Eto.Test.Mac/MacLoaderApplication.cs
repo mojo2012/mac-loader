@@ -82,6 +82,10 @@ namespace Eto.MacLoader {
                 handler.Control.SelectionHighlightStyle = NSTableViewSelectionHighlightStyle.SourceList;
                 handler.ShowHeader = false;
             });
+
+            Style.Add<TreeGridViewHandler>("downloadList", handler => {
+                handler.ScrollView.BorderType = NSBorderType.NoBorder;
+            });
         }
     }
 }

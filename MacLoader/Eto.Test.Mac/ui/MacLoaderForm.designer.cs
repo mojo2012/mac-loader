@@ -7,6 +7,8 @@ using MonoMac.ObjCRuntime;
 using MacLoader.Helpers;
 using Eto.Platform.Mac.Forms.Controls;
 using Eto.Platform.Mac;
+using System.Collections.Generic;
+using System.Collections;
 
 namespace Eto.MacLoader {
     public partial class MacLoaderForm : Form {
@@ -19,7 +21,7 @@ namespace Eto.MacLoader {
         }
 
         public void SetupUserInterface() {
-            this.ClientSize = new Size(600, 400);
+            this.ClientSize = new Size(800, 500);
             this.Title = "MacLoader";
             this.Style = "mainWindow";
 
@@ -34,19 +36,67 @@ namespace Eto.MacLoader {
         }
 
         void GenerateWindowContent() {
+            DynamicLayout layout = new DynamicLayout(this);
+            layout.DefaultPadding = new Padding() {Left = 0, Right = 0, Bottom = 0, Top = 0};
+            layout.BeginVertical();
+
+            //splitter
             Splitter contentSplittler = new Splitter();
-            this.AddDockedControl(contentSplittler);
-
             contentSplittler.FixedPanel = SplitterFixedPanel.Panel1;
-            contentSplittler.Position = 160;
+            contentSplittler.Position = 150;
 
+            //sidebar
             Eto.Forms.TreeGridView sidebar = new Eto.Forms.TreeGridView();
             sidebar.Style = "sidebar";
-//            list..Add(new ListItem { Text="TEST" });
+            sidebar.DataStore = new SidebarStore();
+            contentSplittler.Panel1 = sidebar;
+            
+            //download list
+            TreeGridView downloadList = new TreeGridView();
+            downloadList.Style = "downloadList";
+            
+            downloadList.Columns.Add(new GridColumn { HeaderText = "File", Width = 230, AutoSize = false, Sortable = true });
+            downloadList.Columns.Add(new GridColumn() { HeaderText = "Hoster", Width = 90, AutoSize = false, Sortable = true  });
+            downloadList.Columns.Add(new GridColumn() { HeaderText = "Status", Width = 120, AutoSize = false, Sortable = true  });
+            downloadList.Columns.Add(new GridColumn() { HeaderText = "%", Width = 120, AutoSize = false, Sortable = true  });
+            
+            contentSplittler.Panel2 = downloadList;
 
-//            sidebar.DataStore = new Grid
-//
-//            contentSplittler.Panel1 = sidebar;
+
+            layout.Add(contentSplittler, true, true);
+            //this.AddDockedControl(contentSplittler);
+
+            Panel statusBar = new Panel();
+            layout.Add(statusBar, true, false);
+
+
+            layout.EndVertical();
+        }
+
+        private class SidebarStore : ITreeGridStore<ITreeGridItem> {
+            List<ITreeGridItem> sidebarItems = new List<ITreeGridItem>();
+
+            public SidebarStore() {
+                TreeGridItem i = new TreeGridItem();
+                i.SetValue(0, "Test");
+                sidebarItems.Add(i);
+            }
+
+            public int Count {
+                get {
+                    return sidebarItems.Count;
+                }
+            }
+
+            public ITreeGridItem this [int index] { 
+                get {
+                    return sidebarItems [index];
+                }
+            }
+        }
+
+        public class SidebarEntry : TreeGridItem {
+
         }
 
         void GenerateActions() {
