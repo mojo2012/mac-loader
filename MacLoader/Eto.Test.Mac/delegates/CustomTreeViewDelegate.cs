@@ -2,6 +2,7 @@ using System;
 using MonoMac.AppKit;
 using MonoMac.Foundation;
 using Eto.Platform.Mac.Forms.Controls;
+using Eto.Forms;
 
 namespace Eto.MacLoader.Delegates {
 
@@ -16,7 +17,15 @@ namespace Eto.MacLoader.Delegates {
             var textCell = cell as MacImageListItemCell;
             if (textCell != null) {
                 textCell.UseTextShadow = true;
-                textCell.SetGroupItem(this.IsGroupItem(outlineView, item), outlineView, NSFont.SmallSystemFontSize, NSFont.SmallSystemFontSize);
+
+//                var parentItem = item as TreeViewHandler.EtoTreeItem;
+
+                if (!this.IsGroupItem(outlineView, item)) {
+                    textCell.SetGroupItem(false, outlineView, NSFont.SmallSystemFontSize, NSFont.SmallSystemFontSize);
+                    textCell.BackgroundColor = NSColor.Blue;
+                } else {
+                    textCell.SetGroupItem(true, outlineView, NSFont.SystemFontSize, NSFont.SystemFontSize);
+                }
             }
         }
         
