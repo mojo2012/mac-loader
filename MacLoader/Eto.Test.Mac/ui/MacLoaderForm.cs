@@ -28,6 +28,29 @@ namespace Eto.MacLoader {
             this.Close();
         }
 
+        public override void OnMaximized(EventArgs e) {
+            base.OnMaximized(e);
+        }
+        
+        public override void OnMinimized(EventArgs e) {
+            base.OnMinimized(e);
+        }
+        
+        public override void OnClosing(System.ComponentModel.CancelEventArgs e) {
+            base.OnClosing(e);
+            /*
+             * Note that on OS X, windows usually close, but the application will keep running.  It is
+             * usually better to handle the Application.OnTerminating event instead.
+             * 
+            var result = MessageBox.Show (this, "Are you sure you want to close?", MessageBoxButtons.YesNo);
+            if (result == DialogResult.No) e.Cancel = true;
+            */
+        }
+
+        public override void OnClosed(EventArgs e) {
+            base.OnClosed(e);
+        }
+
         #endregion
     }
 }
