@@ -12,8 +12,12 @@ using System.Collections;
 
 namespace Eto.MacLoader {
     public partial class MacLoaderForm : Form {
+        TreeView sidebar = null;
+
         public MacLoaderForm() {
             SetupUserInterface();
+
+            this.LoadComplete += OnLoadComplete;
         }
 
         public MacLoaderForm(Generator generator):base(generator) {
@@ -32,12 +36,13 @@ namespace Eto.MacLoader {
             GenerateWindowContent();
 
             //events
-
+            HandleEvent(MacLoaderForm.MaximizedEvent, MacLoaderForm.MinimizedEvent);
+            HandleEvent(MacLoaderForm.ClosedEvent, MacLoaderForm.ClosingEvent);
         }
 
         void GenerateWindowContent() {
             DynamicLayout layout = new DynamicLayout(this);
-            layout.DefaultPadding = new Padding() {Left = 0, Right = 0, Bottom = 0, Top = 0};
+            layout.DefaultPadding = new Padding() {Left = 0, Right = 0, Bottom = 10, Top = 0};
             layout.BeginVertical();
 
             //splitter
@@ -46,15 +51,17 @@ namespace Eto.MacLoader {
             contentSplittler.Position = 150;
 
             //sidebar
-            Eto.Forms.TreeGridView sidebar = new Eto.Forms.TreeGridView();
+            sidebar = new Eto.Forms.TreeView();
+//            sidebar.Columns.Add(new GridColumn { DataCell = new TextBoxCell { Binding = new PropertyBinding ("Text") } });
             sidebar.Style = "sidebar";
             sidebar.DataStore = new SidebarStore();
             contentSplittler.Panel1 = sidebar;
-            
+
+
             //download list
             TreeGridView downloadList = new TreeGridView();
             downloadList.Style = "downloadList";
-            
+
             downloadList.Columns.Add(new GridColumn { HeaderText = "File", Width = 230, AutoSize = false, Sortable = true });
             downloadList.Columns.Add(new GridColumn() { HeaderText = "Hoster", Width = 90, AutoSize = false, Sortable = true  });
             downloadList.Columns.Add(new GridColumn() { HeaderText = "Status", Width = 120, AutoSize = false, Sortable = true  });
@@ -66,32 +73,30 @@ namespace Eto.MacLoader {
             layout.Add(contentSplittler, true, true);
             //this.AddDockedControl(contentSplittler);
 
-            Panel statusBar = new Panel();
-            layout.Add(statusBar, true, false);
-
-
             layout.EndVertical();
         }
 
-        private class SidebarStore : ITreeGridStore<ITreeGridItem> {
-            List<ITreeGridItem> sidebarItems = new List<ITreeGridItem>();
-
+        private class SidebarStore : TreeItemCollection {
             public SidebarStore() {
-                TreeGridItem i = new TreeGridItem();
-                i.SetValue(0, "Test");
-                sidebarItems.Add(i);
-            }
+                var downloads = new TreeItem { Text = "Downloads", Key = "Downloads" };
+                var linkGrabber = new TreeItem { Text = "Link Grabber", Key = "Link Grabber" };
+                var labels = new TreeItem { Text = "Labels", Key = "Labels" };
 
-            public int Count {
-                get {
-                    return sidebarItems.Count;
-                }
-            }
+                downloads.Children.Add(new TreeItem { Text = "All", Image = ResourceHelper.LoadIconFromBundle("status-downloading.png") });
+                downloads.Children.Add(new TreeItem { Text = "Downloading", Image = ResourceHelper.LoadIconFromBundle("status-downloading.png") });
+                downloads.Children.Add(new TreeItem { Text = "Completed", Image = ResourceHelper.LoadIconFromBundle("status-completed.png") });
+                downloads.Children.Add(new TreeItem { Text = "Paused", Image = ResourceHelper.LoadIconFromBundle("status-paused.png") });
 
-            public ITreeGridItem this [int index] { 
-                get {
-                    return sidebarItems [index];
-                }
+                linkGrabber.Children.Add(new TreeItem { Text = "All", Image = ResourceHelper.LoadIconFromBundle("status-not-available.png") });
+                linkGrabber.Children.Add(new TreeItem { Text = "Processing", Image = ResourceHelper.LoadIconFromBundle("status-processing.png") });
+                linkGrabber.Children.Add(new TreeItem { Text = "Available", Image = ResourceHelper.LoadIconFromBundle("status-online.png") });
+                linkGrabber.Children.Add(new TreeItem { Text = "Offline", Image = ResourceHelper.LoadIconFromBundle("status-offline.png") });
+
+                labels.Children.Add(new TreeItem { Text = "No Label" });
+
+                this.Add(downloads);
+                this.Add(linkGrabber);
+                this.Add(labels);
             }
         }
 
@@ -106,45 +111,46 @@ namespace Eto.MacLoader {
             // generate actions to use in menus and toolbars
             Application.Instance.GetSystemActions(actions);
 
+            actions.Actions.Add(new Actions.About());
+            actions.Actions.Add(new Actions.Quit());
+            actions.Actions.Add(new Actions.Close());
+            actions.Actions.Add(new Actions.Preferences());
+
             GenerateMenus(actions);
             GenerateToolbar(actions);
-
-            System.Console.WriteLine("break");
         }
 
         void GenerateMenus(GenerateActionArgs args) {
-            var main = args.Menu.FindAddSubMenu("MacLoader", 1);
-            var file = args.Menu.FindAddSubMenu("&File", 100);
-            var edit = args.Menu.FindAddSubMenu("&Edit", 200);
-            var window = args.Menu.FindAddSubMenu("&Window", 900);
-            var help = args.Menu.FindAddSubMenu("Help", 1000);
+            var main = args.Menu.FindAddSubMenu("MacLoader", 0);
+            var file = args.Menu.FindAddSubMenu("&File", 0);
+            var edit = args.Menu.FindAddSubMenu("&Edit", 0);
+            var window = args.Menu.FindAddSubMenu("&Window", 1000);
+//            var help = args.Menu.FindAddSubMenu("Help", 1000);
+            
+            main.Actions.Add(Actions.About.ActionID);
+            main.Actions.AddSeparator();
+            main.Actions.Add(Actions.Preferences.ActionID);
+            main.Actions.AddSeparator();
+            main.Actions.Add("mac_hide");
+            main.Actions.Add("mac_hideothers");
+            main.Actions.Add("mac_showall");
+            main.Actions.AddSeparator();
+            main.Actions.Add(Actions.Quit.ActionID);
 
-            if (Generator.ID == "mac") {
-                // have a nice OS X style menu
+            file.Actions.Add(Actions.Close.ActionID);
 
-//              main.Actions.Add("1", 0);
-//              main.Actions.AddSeparator();
-//              main.Actions.Add("mac_hide", 700);
-//              main.Actions.Add("mac_hideothers", 700);
-//              main.Actions.Add("mac_showall", 700);
-//              main.Actions.AddSeparator(900);
-//              main.Actions.Add("2", 1000);
+            edit.Actions.Add("mac_undo");
+            edit.Actions.Add("mac_redo");
+            edit.Actions.AddSeparator();
+            edit.Actions.Add("mac_cut");
+            edit.Actions.Add("mac_copy");
+            edit.Actions.Add("mac_paste");
+            edit.Actions.Add("mac_delete");
+            edit.Actions.AddSeparator();
+            edit.Actions.Add("mac_selectAll");
 
-                main.Actions.Add("mac_performClose", 900);
-
-
-                edit.Actions.Add("mac_undo", 100);
-                edit.Actions.Add("mac_redo", 100);
-                edit.Actions.AddSeparator(200);
-                edit.Actions.Add("mac_cut", 200);
-                edit.Actions.Add("mac_copy", 200);
-                edit.Actions.Add("mac_paste", 200);
-                edit.Actions.Add("mac_delete", 200);
-                edit.Actions.Add("mac_selectAll", 200);
-
-                window.Actions.Add("mac_performMiniaturize");
-                window.Actions.Add("mac_performZoom");
-            }
+            window.Actions.Add("mac_performMiniaturize");
+            window.Actions.Add("mac_performZoom");
 
             this.Menu = args.Menu.GenerateMenuBar();
         }
@@ -202,6 +208,19 @@ namespace Eto.MacLoader {
         private void addAction(GenerateActionArgs args, Eto.Forms.BaseAction action) {
             args.Actions.Add(action);
             args.ToolBar.Add(action.ID);
+        }
+
+        public void OnLoadComplete(object sender, EventArgs e) {
+            ExpandAllSidebarItems();
+        }
+
+        private void ExpandAllSidebarItems() {
+            NSOutlineView view = ((NSOutlineView)sidebar.ControlObject);
+            
+            //TODO: ugly hack
+            for (int x = 0; x < view.RowCount; x++) {
+                view.ExpandItem(view.ItemAtRow(x), true);
+            }
         }
     }
 }

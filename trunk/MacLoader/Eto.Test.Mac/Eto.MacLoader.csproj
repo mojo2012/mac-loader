@@ -54,6 +54,11 @@
     <Compile Include="ui\MacLoaderForm.cs" />
     <Compile Include="res\ResourceHelper.cs" />
     <Compile Include="ui\MacLoaderForm.designer.cs" />
+    <Compile Include="action\About.cs" />
+    <Compile Include="action\Close.cs" />
+    <Compile Include="action\Preferences.cs" />
+    <Compile Include="action\Quit.cs" />
+    <Compile Include="delegates\CustomTreeViewDelegate.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -65,6 +70,8 @@
     <Folder Include="ui\" />
     <Folder Include="helpers\" />
     <Folder Include="resources\" />
+    <Folder Include="action\" />
+    <Folder Include="delegates\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="macloader_icon.icns" />
