@@ -55,11 +55,9 @@ namespace Eto.MacLoader {
 
             //sidebar
             sidebar = new Eto.Forms.TreeView();
-//            sidebar.Columns.Add(new GridColumn { DataCell = new TextBoxCell { Binding = new PropertyBinding ("Text") } });
             sidebar.Style = "sidebar";
             sidebar.DataStore = new SidebarStore();
             contentSplittler.Panel1 = sidebar;
-
 
             //download list
             TreeGridView downloadList = new TreeGridView();
@@ -83,16 +81,25 @@ namespace Eto.MacLoader {
             var toolbar = new Toolbar();
 
             var icon = ResourceHelper.LoadNSImageFromBundle("toolbar_start.png");
-            toolbar.Items.Add(new ToolbarButton("Start download", icon));
+            var button = new ToolbarButton("Start downloads", icon);
+            button.Clicked += tbStartDownloads_Clicked;
+            toolbar.Items.Add(button);
 
             icon = ResourceHelper.LoadNSImageFromBundle("toolbar_speed_limit.png");
-            toolbar.Items.Add(new ToolbarButton("Limit speed", icon));
+            button = new ToolbarButton("Limit speed", icon);
+            button.Clicked += tbThrottleDownloads_Clicked;
+            toolbar.Items.Add(button);
 
             icon = ResourceHelper.LoadNSImageFromBundle("toolbar_add.png");
-            toolbar.Items.Add(new ToolbarButton("Add URL", icon));
+            button = new ToolbarButton("Add URL", icon);
+            button.Clicked += tbAddURL_Clicked;
+            toolbar.Items.Add(button);
 
             toolbar.Items.Add(new ToolbarFlexibleSpacer());
-            toolbar.Items.Add(new ToolbarSearchField("Filter downloads"));
+
+            var filterBox = new ToolbarSearchField("Filter download list");
+            filterBox.Changed += tbFilterDownloads_Changed;
+            toolbar.Items.Add(filterBox);
 
             var window = this.ControlObject as NSWindow;
             window.Toolbar = toolbar;
