@@ -69,6 +69,7 @@
     <Compile Include="ui\toolbar\ToolbarFlexibleSpacer.cs" />
     <Compile Include="ui\toolbar\ToolbarSpacer.cs" />
     <Compile Include="ui\toolbar\ToolbarSeparator.cs" />
+    <Compile Include="ui\PopOver.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />

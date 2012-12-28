@@ -61,24 +61,24 @@ namespace Eto.MacLoader {
                 ((NSWindow)widget.ControlObject).SetContentBorderThickness(20f, NSRectEdge.MinYEdge);
             });
 
-            Style.Add<ToolBarButton>("toolbarItemBezel", handler => {
-                NSToolbarItem i = (NSToolbarItem)handler.ControlObject;
-                NSButton b = (NSButton)i.View;
-                 
-                if (b == null) {
-                    b = new NSButton(new System.Drawing.RectangleF(0f, 0f, 40f, 23f));
-                    i.View = b;
-                    b.Title = i.Label;
-                    b.Image = (NSImage) handler.Icon.ControlObject;
-                }
+//            Style.Add<ToolBarButton>("toolbarItemBezel", handler => {
+//                NSToolbarItem i = (NSToolbarItem)handler.ControlObject;
+//                NSButton b = (NSButton)i.View;
+//                 
+//                if (b == null) {
+//                    b = new NSButton(new System.Drawing.RectangleF(0f, 0f, 40f, 23f));
+//                    i.View = b;
+//                    b.Title = i.Label;
+//                    b.Image = (NSImage) handler.Icon.ControlObject;
+//                }
+//
+//                b.BezelStyle = NSBezelStyle.TexturedRounded;
+//            });
 
-                b.BezelStyle = NSBezelStyle.TexturedRounded;
-            });
-
-            Style.Add<ToolBarHandler>("toolbar", handler => {
-                handler.Control.AllowsUserCustomization = true;
-                handler.Control.SizeMode = NSToolbarSizeMode.Small;
-            });
+//            Style.Add<ToolBarHandler>("toolbar", handler => {
+//                handler.Control.AllowsUserCustomization = true;
+//                handler.Control.SizeMode = NSToolbarSizeMode.Small;
+//            });
 
             Style.Add<TreeViewHandler>("sidebar", h => {
                 var view = h.Control as NSOutlineView;

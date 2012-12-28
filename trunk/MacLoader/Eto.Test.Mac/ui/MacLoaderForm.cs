@@ -13,19 +13,28 @@ namespace Eto.MacLoader {
 
         #region event handling
         protected void tbStartDownloads_Clicked(object sender, EventArgs e) {
-
+            System.Console.WriteLine("tbStartDownloads_Clicked");
         }
 
         protected void tbThrottleDownloads_Clicked(object sender, EventArgs e) {
-
+            System.Console.WriteLine("tbThrottleDownloads_Clicked");
         }
 
         protected void tbAddURL_Clicked(object sender, EventArgs e) {
-            
+            System.Console.WriteLine("tbAddURL_Clicked");
+
+            var button = sender as NSButton;
+
+            var popover = new PopOver();
+                popover.Show(new System.Drawing.RectangleF (0, 0, 0, 0), button, NSRectEdge.MinYEdge);
         }
 
         protected void tbFilterDownloads_Clicked(object sender, EventArgs e) {
-            System.Console.WriteLine("filter");
+            System.Console.WriteLine("tbFilterDownloads_Clicked");
+        }
+
+        protected void tbFilterDownloads_Changed(object sender, EventArgs e) {
+            System.Console.WriteLine("tbFilterDownloads_Changed");
         }
 
         protected void mainForm_KeyDown(object sender, EventArgs e) {
