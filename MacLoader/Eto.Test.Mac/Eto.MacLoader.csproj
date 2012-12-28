@@ -26,6 +26,7 @@
     <IncludeMonoRuntime>False</IncludeMonoRuntime>
     <CodeSigningKey>Mac Developer</CodeSigningKey>
     <PackageSigningKey>3rd Party Mac Developer Installer</PackageSigningKey>
+    <UseSGen>False</UseSGen>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -38,6 +39,7 @@
     <CreatePackage>False</CreatePackage>
     <EnablePackageSigning>False</EnablePackageSigning>
     <IncludeMonoRuntime>False</IncludeMonoRuntime>
+    <UseSGen>False</UseSGen>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -59,6 +61,15 @@
     <Compile Include="action\Preferences.cs" />
     <Compile Include="action\Quit.cs" />
     <Compile Include="delegates\CustomTreeViewDelegate.cs" />
+    <Compile Include="ui\toolbar\SearchAction.cs" />
+    <Compile Include="ui\toolbar\Toolbar.cs" />
+    <Compile Include="ui\toolbar\ToolbarSearchField.cs">
+      <DependentUpon>ToolbarSearchField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ui\toolbar\ToolbarButton.cs" />
+    <Compile Include="ui\toolbar\ToolbarFlexibleSpacer.cs" />
+    <Compile Include="ui\toolbar\ToolbarSpacer.cs" />
+    <Compile Include="ui\toolbar\ToolbarSeparator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -72,6 +83,7 @@
     <Folder Include="resources\" />
     <Folder Include="action\" />
     <Folder Include="delegates\" />
+    <Folder Include="ui\toolbar\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="macloader_icon.icns" />
@@ -91,16 +103,6 @@
     <Content Include="resources\status-online.png" />
     <Content Include="resources\status-paused.png" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Eto\Source\Eto\Eto.csproj">
-      <Project>{16289D2F-044C-49EF-83E9-9391AFF8FD2B}</Project>
-      <Name>Eto</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Eto\Source\Eto.Platform.Mac\Eto.Platform.Mac.csproj">
-      <Project>{9DD10DFF-5AB3-4E66-B798-CA17911A61E4}</Project>
-      <Name>Eto.Platform.Mac</Name>
-    </ProjectReference>
-  </ItemGroup>
   <ProjectExtensions>
     <MonoDevelop>
       <Properties>
@@ -112,4 +114,14 @@
       </Properties>
     </MonoDevelop>
   </ProjectExtensions>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Eto\Source\Eto\Eto.csproj">
+      <Project>{16289D2F-044C-49EF-83E9-9391AFF8FD2B}</Project>
+      <Name>Eto</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Eto\Source\Eto.Platform.Mac\Eto.Platform.Mac.csproj">
+      <Project>{9DD10DFF-5AB3-4E66-B798-CA17911A61E4}</Project>
+      <Name>Eto.Platform.Mac</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

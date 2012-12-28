@@ -41,6 +41,8 @@ namespace Eto.MacLoader {
         }
 
         void GenerateWindowContent() {
+            createToolbar();
+
             DynamicLayout layout = new DynamicLayout(this);
             layout.DefaultPadding = new Padding() {Left = 0, Right = 0, Bottom = 10, Top = 0};
             layout.BeginVertical();
@@ -74,6 +76,25 @@ namespace Eto.MacLoader {
             //this.AddDockedControl(contentSplittler);
 
             layout.EndVertical();
+        }
+
+        private void createToolbar() {
+            var toolbar = new Toolbar();
+
+            var icon = ResourceHelper.LoadNSImageFromBundle("toolbar_start.png");
+            toolbar.Items.Add(new Eto.MacLoader.ToolbarButton("Start download", icon, "start_downloads"));
+
+            icon = ResourceHelper.LoadNSImageFromBundle("toolbar_speed_limit.png");
+            toolbar.Items.Add(new Eto.MacLoader.ToolbarButton("Limit speed", icon, "limit_speed"));
+
+            icon = ResourceHelper.LoadNSImageFromBundle("toolbar_add.png");
+            toolbar.Items.Add(new Eto.MacLoader.ToolbarButton("Add URL", icon, "add_url"));
+
+            toolbar.Items.Add(new ToolbarFlexibleSpacer());
+            toolbar.Items.Add(new ToolbarSearchField("Filter downloads", "filter_downloads"));
+
+            var window = this.ControlObject as NSWindow;
+            window.Toolbar = toolbar;
         }
 
         private class SidebarStore : TreeItemCollection {
@@ -117,7 +138,7 @@ namespace Eto.MacLoader {
             actions.Actions.Add(new Actions.Preferences());
 
             GenerateMenus(actions);
-            GenerateToolbar(actions);
+//            GenerateToolbar(actions);
         }
 
         void GenerateMenus(GenerateActionArgs args) {
@@ -164,11 +185,7 @@ namespace Eto.MacLoader {
                     "Start",
                     icon,
                     new EventHandler<EventArgs>(tbStartDownloads_Clicked)
-            );
-
-            startDownloadsTB.ToolBarText = "Start downloads";
-            startDownloadsTB.TooltipText = "Starts downloading all files.";
-            startDownloadsTB.ToolBarItemStyle = "toolbarItemBezel";
+            ) { ToolBarText = "Start downloads", TooltipText = "Starts downloading all files.", ToolBarItemStyle = "toolbarItemBezel" };
 
             //limit download speed button
             icon = ResourceHelper.LoadIconFromBundle("toolbar_speed_limit.png");
@@ -177,12 +194,8 @@ namespace Eto.MacLoader {
                 "Limit download speed",
                 icon,
                 new EventHandler<EventArgs>(tbThrottleDownloads_Clicked)
-            );
+            ) { ToolBarText = "Limit speed", TooltipText = "Limit download speed", ToolBarItemStyle = "toolbarItemBezel" };
             
-            limitDownloadSpeedDownloadsTB.ToolBarText = "Limit speed";
-            limitDownloadSpeedDownloadsTB.TooltipText = "Limit download speed";
-            limitDownloadSpeedDownloadsTB.ToolBarItemStyle = "toolbarItemBezel";
-
             //add link
             icon = ResourceHelper.LoadIconFromBundle("toolbar_add.png");
             ButtonAction addURLTB = new ButtonAction(
@@ -190,16 +203,25 @@ namespace Eto.MacLoader {
                 "Add URL",
                 icon,
                 new EventHandler<EventArgs>(tbAddURL_Clicked)
-            );
-            
-            addURLTB.ToolBarText = "Add URL";
-            addURLTB.TooltipText = "Add URL to download";
-            addURLTB.ToolBarItemStyle = "toolbarItemBezel";
+            ) { ToolBarText = "Add URL", TooltipText = "Add URL to download", ToolBarItemStyle = "toolbarItemBezel" };
 
             // add action
             addAction(args, startDownloadsTB);
             addAction(args, limitDownloadSpeedDownloadsTB);
             addAction(args, addURLTB);
+
+
+            //spacer
+
+
+            //search field
+//            SearchAction searchTB = new SearchAction(
+//                "tb_filter_downloads",
+//                "Filter downloads",
+//                new EventHandler<EventArgs>(tbFilterDownloads_Clicked)
+//                ) { ToolBarText = "Filter download list", TooltipText = "Filter download list", ToolBarItemStyle = "toolbarSearchField" };
+
+            //addAction(args, addURLTB);
 
             this.ToolBar = args.ToolBar.GenerateToolBar();
             this.ToolBar.Style = "toolbar";
@@ -221,6 +243,8 @@ namespace Eto.MacLoader {
             for (int x = 0; x < view.RowCount; x++) {
                 view.ExpandItem(view.ItemAtRow(x), true);
             }
+
+            // view.ItemAtRow(0)
         }
     }
 }

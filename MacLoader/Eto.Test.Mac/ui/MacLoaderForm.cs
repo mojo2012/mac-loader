@@ -24,6 +24,10 @@ namespace Eto.MacLoader {
             
         }
 
+        protected void tbFilterDownloads_Clicked(object sender, EventArgs e) {
+            System.Console.WriteLine("filter");
+        }
+
         protected void mainForm_KeyDown(object sender, EventArgs e) {
             this.Close();
         }
