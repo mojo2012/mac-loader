@@ -81,11 +81,14 @@ namespace Eto.MacLoader {
             });
 
             Style.Add<TreeViewHandler>("sidebar", h => {
-                h.Control.Delegate = new CustomTreeViewDelegate { Handler = h, AllowGroupSelection = false };
-                h.Control.SelectionHighlightStyle = NSTableViewSelectionHighlightStyle.SourceList;
+                var view = h.Control as NSOutlineView;
+
+                view.Delegate = new CustomTreeViewDelegate { Handler = h, AllowGroupSelection = false };
+                view.SelectionHighlightStyle = NSTableViewSelectionHighlightStyle.SourceList;
+                view.FocusRingType = NSFocusRingType.None;
+                view.FloatsGroupRows = true;
+
                 h.Scroll.BorderType = NSBorderType.NoBorder;
-                h.Control.FocusRingType = NSFocusRingType.None;
-                NSOutlineView view = (NSOutlineView) h.Control;
             });
 
             Style.Add<TreeGridViewHandler>("downloadList", handler => {
