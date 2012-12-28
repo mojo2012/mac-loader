@@ -3,7 +3,7 @@ using MonoMac.AppKit;
 using System.Linq;
 using System.Collections.Generic;
 
-namespace Eto.MacLoader {
+namespace Eto.MacLoader.UI {
     public class Toolbar : NSToolbar {
         TBDelegate del = null;
 
