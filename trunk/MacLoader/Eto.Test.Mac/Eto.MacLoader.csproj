@@ -61,7 +61,6 @@
     <Compile Include="action\Preferences.cs" />
     <Compile Include="action\Quit.cs" />
     <Compile Include="delegates\CustomTreeViewDelegate.cs" />
-    <Compile Include="ui\toolbar\SearchAction.cs" />
     <Compile Include="ui\toolbar\Toolbar.cs" />
     <Compile Include="ui\toolbar\ToolbarSearchField.cs">
       <DependentUpon>ToolbarSearchField.cs</DependentUpon>

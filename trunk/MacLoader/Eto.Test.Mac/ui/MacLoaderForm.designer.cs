@@ -9,6 +9,7 @@ using Eto.Platform.Mac.Forms.Controls;
 using Eto.Platform.Mac;
 using System.Collections.Generic;
 using System.Collections;
+using Eto.MacLoader.UI;
 
 namespace Eto.MacLoader {
     public partial class MacLoaderForm : Form {
@@ -82,16 +83,16 @@ namespace Eto.MacLoader {
             var toolbar = new Toolbar();
 
             var icon = ResourceHelper.LoadNSImageFromBundle("toolbar_start.png");
-            toolbar.Items.Add(new Eto.MacLoader.ToolbarButton("Start download", icon, "start_downloads"));
+            toolbar.Items.Add(new ToolbarButton("Start download", icon));
 
             icon = ResourceHelper.LoadNSImageFromBundle("toolbar_speed_limit.png");
-            toolbar.Items.Add(new Eto.MacLoader.ToolbarButton("Limit speed", icon, "limit_speed"));
+            toolbar.Items.Add(new ToolbarButton("Limit speed", icon));
 
             icon = ResourceHelper.LoadNSImageFromBundle("toolbar_add.png");
-            toolbar.Items.Add(new Eto.MacLoader.ToolbarButton("Add URL", icon, "add_url"));
+            toolbar.Items.Add(new ToolbarButton("Add URL", icon));
 
             toolbar.Items.Add(new ToolbarFlexibleSpacer());
-            toolbar.Items.Add(new ToolbarSearchField("Filter downloads", "filter_downloads"));
+            toolbar.Items.Add(new ToolbarSearchField("Filter downloads"));
 
             var window = this.ControlObject as NSWindow;
             window.Toolbar = toolbar;
