@@ -5,9 +5,13 @@ using MonoMac.Foundation;
 using MonoMac.AppKit;
 using MonoMac.ObjCRuntime;
 using MacLoader.Helpers;
+using SD = System.Drawing;
+
 
 namespace MacLoader.UI {
     public partial class MacLoaderForm : Form {
+
+
 
         #region event handling
         protected void tbStartDownloads_Clicked(object sender, EventArgs e) {
@@ -19,12 +23,11 @@ namespace MacLoader.UI {
         }
 
         protected void tbAddURL_Clicked(object sender, EventArgs e) {
-            System.Console.WriteLine("tbAddURL_Clicked");
+            Eto.Forms.Form popoverView = new Form();
+            popoverView.AddDockedControl(new TextBox());
 
-            var button = sender as NSButton;
-
-            var popover = new PopOver();
-                popover.Show(new System.Drawing.RectangleF (0, 0, 0, 0), button, NSRectEdge.MinYEdge);
+            var popover = new PopOver(popoverView.ControlObject as NSView);
+            popover.Show(new SD.RectangleF (0, 0, 0, 0), sender as NSButton, NSRectEdge.MinYEdge);
         }
 
         protected void tbFilterDownloads_Clicked(object sender, EventArgs e) {

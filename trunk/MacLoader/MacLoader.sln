@@ -1,8 +1,6 @@
-
+﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MacLoader", "MacLoader\MacLoader.csproj", "{B8803BEB-B8AC-43E8-89C8-F97FC30CC5D8}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MacLoader.Eto", "MacLoader.Eto\MacLoader.Eto.csproj", "{57BCCF63-1D05-4AD6-9BBB-E2CE4E2451AB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eto", "..\Eto\Source\Eto\Eto.csproj", "{16289D2F-044C-49EF-83E9-9391AFF8FD2B}"
@@ -34,12 +32,6 @@ Global
 		{9DD10DFF-5AB3-4E66-B798-CA17911A61E4}.Debug|x86.Build.0 = Debug|Any CPU
 		{9DD10DFF-5AB3-4E66-B798-CA17911A61E4}.Release|x86.ActiveCfg = Release|Any CPU
 		{9DD10DFF-5AB3-4E66-B798-CA17911A61E4}.Release|x86.Build.0 = Release|Any CPU
-		{B8803BEB-B8AC-43E8-89C8-F97FC30CC5D8}.AppStore|x86.ActiveCfg = AppStore|x86
-		{B8803BEB-B8AC-43E8-89C8-F97FC30CC5D8}.AppStore|x86.Build.0 = AppStore|x86
-		{B8803BEB-B8AC-43E8-89C8-F97FC30CC5D8}.Debug|x86.ActiveCfg = Debug|x86
-		{B8803BEB-B8AC-43E8-89C8-F97FC30CC5D8}.Debug|x86.Build.0 = Debug|x86
-		{B8803BEB-B8AC-43E8-89C8-F97FC30CC5D8}.Release|x86.ActiveCfg = Release|x86
-		{B8803BEB-B8AC-43E8-89C8-F97FC30CC5D8}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = MacLoader.Eto\MacLoader.Eto.csproj

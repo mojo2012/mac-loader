@@ -1,9 +1,6 @@
-﻿<Properties MonoDevelop.MonoMac.LastXamMacNagTime="01.01.2013 16:01:20">
+﻿<Properties MonoDevelop.MonoMac.LastXamMacNagTime="01.01.2013 16:49:26">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Eto.MacLoader/helper/ResourceHelper.cs">
-    <Files>
-      <File FileName="Eto.MacLoader/helper/ResourceHelper.cs" Line="7" Column="28" />
-    </Files>
+  <MonoDevelop.Ide.Workbench>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
