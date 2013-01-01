@@ -76,7 +76,6 @@
     <Compile Include="controller\MainWindowController.cs" />
     <Compile Include="controller\SplitViewDelegate.cs" />
     <Compile Include="helpers\ResourceHelper.cs" />
-    <Compile Include="user_interface\events\UIOutlineViewEventArgs.cs" />
     <Compile Include="user_interface\generated\MainMenu.designer.cs" />
     <Compile Include="user_interface\generated\MainWindow.cs" />
     <Compile Include="user_interface\generated\MainWindow.designer.cs" />
