@@ -18,7 +18,7 @@ namespace MacLoader.UI {
             }
         }
 
-        public PopOver() : this(new System.Drawing.RectangleF (0, 0, 0, 0)) {
+        public PopOver() : this(new System.Drawing.RectangleF (0, 0, 300, 150)) {
         }
 
         public PopOver(NSView contentView) {
@@ -32,7 +32,7 @@ namespace MacLoader.UI {
         }
         
         private void Initialize(NSView contentView) {
-            this.ContentSize = new System.Drawing.SizeF(200, 200);
+            this.ContentSize = new SizeF(contentView.Bounds.Width, contentView.Bounds.Height);
             this.Behavior = NSPopoverBehavior.Transient;
             this.ContentViewController = new Controller();
 
@@ -45,13 +45,13 @@ namespace MacLoader.UI {
             
             this.Behavior = NSPopoverBehavior.Transient;
         }
-        
-        public void Show(RectangleF relativePositioningRect, NSView positioningView, NSRectEdge preferredEdge, bool resetContentView) {
-            if (resetContentView) {
-                
-            }
-            
-            base.Show(relativePositioningRect, positioningView, preferredEdge);
+
+        public void Show(NSView relativeToView) {
+            Show(NSRectEdge.MinYEdge, relativeToView);
+        }
+
+        public void Show(NSRectEdge preferredEdge, NSView relativeToView) {
+            base.Show(new RectangleF (0, 0, 0, 0), relativeToView, preferredEdge);
         }
     }
     

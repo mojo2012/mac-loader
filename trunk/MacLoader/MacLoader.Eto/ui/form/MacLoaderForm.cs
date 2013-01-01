@@ -1,6 +1,6 @@
 using System;
 using Eto.Forms;
-using Eto.Drawing;
+using ED = Eto.Drawing;
 using MonoMac.Foundation;
 using MonoMac.AppKit;
 using MonoMac.ObjCRuntime;
@@ -10,9 +10,6 @@ using SD = System.Drawing;
 
 namespace MacLoader.UI {
     public partial class MacLoaderForm : Form {
-
-
-
         #region event handling
         protected void tbStartDownloads_Clicked(object sender, EventArgs e) {
             System.Console.WriteLine("tbStartDownloads_Clicked");
@@ -23,11 +20,22 @@ namespace MacLoader.UI {
         }
 
         protected void tbAddURL_Clicked(object sender, EventArgs e) {
-            Eto.Forms.Form popoverView = new Form();
-            popoverView.AddDockedControl(new TextBox());
+            Eto.Forms.Panel popoverView = new Panel();
+            popoverView.Size = new ED.Size(450, 200);
+
+            var layout = new DynamicLayout(popoverView);
+            layout.BeginVertical();
+
+            TextBox urlTextBox = new TextBox() { Text = "Enter URL here" };
+            var addFileButton = new Button() { Text = "Add" };
+
+            layout.Add(urlTextBox);
+            layout.Add(addFileButton);
+
+            layout.EndVertical();
 
             var popover = new PopOver(popoverView.ControlObject as NSView);
-            popover.Show(new SD.RectangleF (0, 0, 0, 0), sender as NSButton, NSRectEdge.MinYEdge);
+            popover.Show(sender as NSButton);
         }
 
         protected void tbFilterDownloads_Clicked(object sender, EventArgs e) {
