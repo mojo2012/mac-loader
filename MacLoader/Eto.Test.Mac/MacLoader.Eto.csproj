@@ -10,6 +10,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>Eto.MacLoader</RootNamespace>
     <AssemblyName>MacLoader</AssemblyName>
+    <ReleaseVersion>0.2</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -53,14 +54,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MacLoaderApplication.cs" />
-    <Compile Include="ui\MacLoaderForm.cs" />
     <Compile Include="res\ResourceHelper.cs" />
-    <Compile Include="ui\MacLoaderForm.designer.cs" />
     <Compile Include="action\About.cs" />
     <Compile Include="action\Close.cs" />
     <Compile Include="action\Preferences.cs" />
     <Compile Include="action\Quit.cs" />
-    <Compile Include="delegates\CustomTreeViewDelegate.cs" />
     <Compile Include="ui\toolbar\Toolbar.cs" />
     <Compile Include="ui\toolbar\ToolbarSearchField.cs">
       <DependentUpon>ToolbarSearchField.cs</DependentUpon>
@@ -69,7 +67,11 @@
     <Compile Include="ui\toolbar\ToolbarFlexibleSpacer.cs" />
     <Compile Include="ui\toolbar\ToolbarSpacer.cs" />
     <Compile Include="ui\toolbar\ToolbarSeparator.cs" />
-    <Compile Include="ui\PopOver.cs" />
+    <Compile Include="ui\form\MacLoaderForm.cs" />
+    <Compile Include="ui\control\ImageAndTextCell.cs" />
+    <Compile Include="ui\control\PopOver.cs" />
+    <Compile Include="ui\form\MacLoaderForm.designer.cs" />
+    <Compile Include="delegates\TreeViewDelegate.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -84,6 +86,8 @@
     <Folder Include="action\" />
     <Folder Include="delegates\" />
     <Folder Include="ui\toolbar\" />
+    <Folder Include="ui\form\" />
+    <Folder Include="ui\control\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="macloader_icon.icns" />

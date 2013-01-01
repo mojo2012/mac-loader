@@ -83,7 +83,7 @@ namespace Eto.MacLoader {
             Style.Add<TreeViewHandler>("sidebar", h => {
                 var view = h.Control as NSOutlineView;
 
-                view.Delegate = new CustomTreeViewDelegate { Handler = h, AllowGroupSelection = false };
+                view.Delegate = new TreeViewDelegate { Handler = h, AllowGroupSelection = false };
                 view.SelectionHighlightStyle = NSTableViewSelectionHighlightStyle.SourceList;
                 view.FocusRingType = NSFocusRingType.None;
                 view.FloatsGroupRows = true;
