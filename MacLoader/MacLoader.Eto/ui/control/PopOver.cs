@@ -3,7 +3,7 @@ using MonoMac.AppKit;
 using MonoMac.Foundation;
 using System.Drawing;
 
-namespace Eto.MacLoader {
+namespace MacLoader.UI {
     public class PopOver : NSPopover {
         NSView contentView = null;
         bool closed = false;

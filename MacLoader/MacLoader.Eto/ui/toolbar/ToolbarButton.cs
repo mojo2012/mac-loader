@@ -4,7 +4,7 @@ using MonoMac.AppKit;
 using MonoMac.ObjCRuntime;
 using System.Drawing;
 
-namespace Eto.MacLoader.UI {
+namespace MacLoader.UI {
     public class ToolbarButton : NSToolbarItem {
         public delegate void ClickedEventHandler(object sender,EventArgs e);
 
