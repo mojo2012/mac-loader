@@ -6,7 +6,7 @@ using MonoMac.AppKit;
 using MonoMac.ObjCRuntime;
 using MacLoader.Helpers;
 
-namespace Eto.MacLoader {
+namespace MacLoader.UI {
     public partial class MacLoaderForm : Form {
 
         #region event handling

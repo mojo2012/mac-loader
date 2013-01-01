@@ -7,9 +7,10 @@ using MonoMac.ObjCRuntime;
 using MacLoader.Helpers;
 using System.Collections.Generic;
 using System.Collections;
-using Eto.MacLoader.UI;
+using MacLoader.UI;
+using Eto;
 
-namespace Eto.MacLoader {
+namespace MacLoader.UI {
     public partial class MacLoaderForm : Form {
         TreeView sidebar = null;
 

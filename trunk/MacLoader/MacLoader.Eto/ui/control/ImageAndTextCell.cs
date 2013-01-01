@@ -6,7 +6,7 @@ using System.Drawing;
 using MonoMac.ObjCRuntime;
 using System.Collections.Generic;
 
-namespace Eto.MacLoader {
+namespace MacLoader.UI {
     [Register("ImageAndTextCell")]
     public class ImageAndTextCell : NSTextFieldCell {
         private NSImage _image;

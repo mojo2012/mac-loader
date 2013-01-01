@@ -7,6 +7,7 @@ using Eto.Forms;
 using Eto.Platform.Mac.Forms.Controls;
 using Eto.Platform.Mac;
 using Eto.MacLoader.Delegates;
+using MacLoader.UI;
 
 namespace Eto.MacLoader {
     public class MacLoaderApplication : Application {
