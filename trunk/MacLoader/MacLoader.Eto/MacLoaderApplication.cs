@@ -20,8 +20,6 @@ namespace Eto.MacLoader {
             HandleEvent(Application.TerminatingEvent);
 
             base.OnInitialized(e);
-
-            // show the main form
             this.MainForm.Show();
         }
 
