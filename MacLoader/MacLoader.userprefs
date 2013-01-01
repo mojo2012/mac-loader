@@ -1,0 +1,64 @@
+﻿<Properties MonoDevelop.MonoMac.LastXamMacNagTime="01.01.2013 16:01:20">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Eto.MacLoader/helper/ResourceHelper.cs">
+    <Files>
+      <File FileName="Eto.MacLoader/helper/ResourceHelper.cs" Line="7" Column="28" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="MacLoader.Eto" expanded="True" selected="True">
+            <Node name="helper" expanded="True" />
+            <Node name="ui" expanded="True">
+              <Node name="control" expanded="True" />
+              <Node name="form" expanded="True" />
+              <Node name="toolbar" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="ClassPad">
+        <State expanded="True" selected="True">
+          <Node name="MacLoader" expanded="True" />
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State>
+          <Value>sidebar.ControlObject</Value>
+          <Value>item.GetType()</Value>
+          <Value>view.ItemAtRow(0)</Value>
+          <Value>textCell.CellSize</Value>
+          <Value>outlineView.GetDataCell</Value>
+          <Value>inView.FittingSize</Value>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/ash/Projekte/MonoDevelop/mac-loader/trunk/MacLoader/MacLoader/user_interface/widget/UIOutlineView.cs" line="143" />
+      <Breakpoint file="/Users/ash/Projekte/MonoDevelop/mac-loader/trunk/MacLoader/MacLoader/user_interface/widget/UIOutlineView.cs" line="102" />
+      <Breakpoint file="/Users/ash/Projekte/MonoDevelop/mac-loader/trunk/MacLoader/MacLoader/user_interface/widget/UIOutlineView.cs" line="83" />
+      <Breakpoint file="/Users/ash/Projekte/MonoDevelop/mac-loader/trunk/MacLoader/MacLoaderEtoForms/MacLoaderForm.cs" line="11" />
+      <Breakpoint file="/Users/ash/Projekte/MonoDevelop/mac-loader/trunk/MacLoader/MacLoaderEtoForms/Main.cs" line="13" />
+      <Breakpoint file="/Users/ash/Projekte/MonoDevelop/mac-loader/trunk/MacLoader/Eto.MacLoader/ui/MacLoaderForm.cs" line="117" />
+      <Breakpoint file="/Users/ash/Projekte/MonoDevelop/MacLoader/Eto.MacLoader/ui/MacLoaderForm.cs" line="161" />
+      <Breakpoint file="/Users/ash/Projekte/MonoDevelop/Eto/Source/Eto.Platform.Mac/Forms/ToolBar/ToolBarItemHandler.cs" line="92" />
+      <Breakpoint file="/Users/ash/Projekte/MonoDevelop/Eto/Source/Eto.Platform.Mac/Forms/Actions/MacButtonAction.cs" line="31" />
+      <Breakpoint file="/Users/ash/Projekte/MonoDevelop/Eto/Source/Eto.Platform.Mac/Forms/ToolBar/ToolBarHandler.cs" line="38" />
+      <Breakpoint file="/Users/ash/Projekte/MonoDevelop/Eto/Source/Eto.Platform.Mac/Forms/MacView.cs" line="487" />
+      <Breakpoint file="/Users/matthias/Projekte/MonoDevelop/MacLoader/Eto.MacLoader/AppDelegate.cs" line="16" />
+      <Breakpoint file="/Users/matthias/Projekte/MonoDevelop/MacLoader/Eto.MacLoader/AppDelegate.cs" line="25" />
+      <Breakpoint file="/Users/matthias/Projekte/MonoDevelop/MacLoader/Eto.MacLoader/AppDelegate.cs" line="31" />
+      <Breakpoint file="/Users/matthias/Projekte/MonoDevelop/MacLoader/Eto.MacLoader/AppDelegate.cs" line="37" />
+      <Breakpoint file="/Users/matthias/Projekte/MonoDevelop/MacLoader/MacLoader/user_interface/widget/NSImageAndTextCell.cs" line="71" />
+      <Breakpoint file="/Users/matthias/Projekte/MonoDevelop/Eto/Source/Eto.Platform.Mac/Forms/Cells/ImageTextCellHandler.cs" line="100" />
+      <Breakpoint file="/Users/matthias/Projekte/MonoDevelop/MacLoader/Eto.MacLoader/delegates/CustomTreeViewDelegate.cs" line="24" />
+      <Breakpoint file="/Users/matthias/Projekte/MonoDevelop/Eto/Source/Eto.Platform.Mac/Forms/Cells/ImageTextCellHandler.cs" line="68" />
+      <Breakpoint file="/Users/matthias/Projekte/MonoDevelop/Eto/Source/Eto.Platform.Mac/Forms/Controls/ListBoxHandler.cs" line="37" />
+      <Breakpoint file="/Users/matthias/Projekte/MonoDevelop/Eto/Source/Eto.Platform.Mac/Forms/Controls/TreeGridViewHandler.cs" line="69" />
+      <Breakpoint file="/Users/matthias/Projekte/MonoDevelop/Eto/Source/Eto.Platform.Mac/Forms/Controls/TreeGridViewHandler.cs" line="81" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
