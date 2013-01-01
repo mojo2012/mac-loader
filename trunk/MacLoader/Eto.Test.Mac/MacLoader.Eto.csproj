@@ -54,11 +54,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MacLoaderApplication.cs" />
-    <Compile Include="res\ResourceHelper.cs" />
-    <Compile Include="action\About.cs" />
-    <Compile Include="action\Close.cs" />
-    <Compile Include="action\Preferences.cs" />
-    <Compile Include="action\Quit.cs" />
     <Compile Include="ui\toolbar\Toolbar.cs" />
     <Compile Include="ui\toolbar\ToolbarSearchField.cs">
       <DependentUpon>ToolbarSearchField.cs</DependentUpon>
@@ -71,7 +66,12 @@
     <Compile Include="ui\control\ImageAndTextCell.cs" />
     <Compile Include="ui\control\PopOver.cs" />
     <Compile Include="ui\form\MacLoaderForm.designer.cs" />
-    <Compile Include="delegates\TreeViewDelegate.cs" />
+    <Compile Include="helper\ResourceHelper.cs" />
+    <Compile Include="ui\delegate\TreeViewDelegate.cs" />
+    <Compile Include="actions\About.cs" />
+    <Compile Include="actions\Close.cs" />
+    <Compile Include="actions\Preferences.cs" />
+    <Compile Include="actions\Quit.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -79,15 +79,13 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Mono\MonoMac\v0.0\Mono.MonoMac.targets" />
   <ItemGroup>
-    <Folder Include="res\" />
     <Folder Include="ui\" />
-    <Folder Include="helpers\" />
     <Folder Include="resources\" />
-    <Folder Include="action\" />
-    <Folder Include="delegates\" />
     <Folder Include="ui\toolbar\" />
     <Folder Include="ui\form\" />
     <Folder Include="ui\control\" />
+    <Folder Include="helper\" />
+    <Folder Include="actions\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="macloader_icon.icns" />

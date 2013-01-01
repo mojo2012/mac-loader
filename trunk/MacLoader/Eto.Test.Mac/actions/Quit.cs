@@ -1,7 +1,7 @@
 using System;
 using Eto.Forms;
 
-namespace Eto.MacLoader.Actions {
+namespace MacLoader.Actions {
     public class Quit : ButtonAction {
         public const string ActionID = "quit";
         

@@ -2,7 +2,7 @@ using System;
 using Eto.Forms;
 using Eto.Drawing;
 
-namespace Eto.MacLoader.Actions {
+namespace MacLoader.Actions {
     public class Preferences : ButtonAction {
         public const string ActionID = "preferences";
         
