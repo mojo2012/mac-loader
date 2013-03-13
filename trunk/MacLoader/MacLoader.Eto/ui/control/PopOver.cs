@@ -2,6 +2,7 @@ using System;
 using MonoMac.AppKit;
 using MonoMac.Foundation;
 using System.Drawing;
+using Eto.Forms;
 
 namespace MacLoader.UI {
     public class PopOver : NSPopover {
@@ -24,7 +25,13 @@ namespace MacLoader.UI {
         public PopOver(NSView contentView) {
             Initialize(contentView);
         }
-        
+
+        public PopOver(Form container) : this((container.ControlObject as NSWindow).ContentView as NSView) {
+        }
+
+        public PopOver(Container container) : this(container.ControlObject as NSView) {
+        }
+
         public PopOver(RectangleF bounds) {
             NSView contentView = new NSView(bounds);
             

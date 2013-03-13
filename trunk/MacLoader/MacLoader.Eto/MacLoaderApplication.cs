@@ -52,12 +52,25 @@ namespace Eto.MacLoader {
         }
 
         static void AddStyles() {
-            // support full screen mode!
             Style.Add<Window>("mainWindow", widget => {
-                ((NSWindow)widget.ControlObject).CollectionBehavior |= NSWindowCollectionBehavior.FullScreenPrimary;
-                ((NSWindow)widget.ControlObject).StyleMask |= NSWindowStyle.UnifiedTitleAndToolbar;
-                ((NSWindow)widget.ControlObject).SetAutorecalculatesContentBorderThickness(false, NSRectEdge.MinYEdge);
-                ((NSWindow)widget.ControlObject).SetContentBorderThickness(20f, NSRectEdge.MinYEdge);
+                var window = widget.ControlObject as NSWindow;
+
+                // support full screen mode!
+                window.CollectionBehavior |= NSWindowCollectionBehavior.FullScreenPrimary;
+                window.StyleMask |= NSWindowStyle.UnifiedTitleAndToolbar;
+                window.SetAutorecalculatesContentBorderThickness(false, NSRectEdge.MinYEdge);
+                window.SetContentBorderThickness(20f, NSRectEdge.MinYEdge);
+                window.StyleMask |= NSWindowStyle.TexturedBackground;
+
+//                var superView = window.ContentView.Superview;
+//
+//                var r = superView.Frame;
+//                r.Height = 100;
+//
+//                superView.Frame = r;
+//                superView.NeedsDisplay = true;
+
+//                var titlebar = superView.Subviews;
             });
 
 //            Style.Add<ToolBarButton>("toolbarItemBezel", handler => {
