@@ -1,17 +1,17 @@
 ﻿<Properties MonoDevelop.MonoMac.LastXamMacNagTime="13.03.2013 17:34:55">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
   <MonoDevelop.Ide.Workbench ActiveDocument="MacLoader.Eto/ui/form/MacLoaderForm.cs">
     <Files>
-      <File FileName="MacLoader.Eto/ui/control/PopOver.cs" Line="1" Column="1" />
-      <File FileName="MacLoader.Eto/ui/form/MacLoaderForm.cs" Line="14" Column="66" />
-      <File FileName="MacLoader.Eto/ui/form/MacLoaderForm.designer.cs" Line="1" Column="1" />
+      <File FileName="MacLoader.Eto/ui/form/MacLoaderForm.cs" Line="48" Column="13" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
-        <State expanded="True">
+        <State expanded="True" selected="True">
           <Node name="MacLoader.Eto" expanded="True">
-            <Node name="actions" expanded="True" selected="True" />
-            <Node name="ui" expanded="True" />
+            <Node name="ui" expanded="True">
+              <Node name="control" expanded="True" />
+              <Node name="form" expanded="True" />
+            </Node>
           </Node>
         </State>
       </Pad>
