@@ -9,13 +9,15 @@ namespace MacLoader.UI {
         public delegate void ClickedEventHandler(object sender,EventArgs e);
 
         public event ClickedEventHandler Clicked;
+        public event ClickedEventHandler MouseUp;
 
         public ToolbarButton(String text, NSImage icon, RectangleF size, String identifier) : base(identifier) {
-            var button = new NSButton(size) { Title = text, BezelStyle = NSBezelStyle.TexturedRounded };
+            var button = new Button(size) { Title = text, BezelStyle = NSBezelStyle.TexturedRounded };
             this.View = button;
             this.Label = text;
 
             button.Activated += buttonClicked;
+//            button.MouseUp += buttonMouseUp;
 
             if (icon != null) {
                 this.Image = icon;
@@ -30,8 +32,23 @@ namespace MacLoader.UI {
                 Clicked(sender, e);
         }
 
+        private void buttonMouseUp(object sender, EventArgs e) {
+            if (MouseUp != null)
+                MouseUp(sender, e);
+        }
+
         public NSView ButtonView {
             get { return this.View; }
+        }
+
+        private class Button : NSButton {
+            public Button(RectangleF size) : base(size) {
+            }
+
+//            public override void MouseUp(NSEvent e) {
+//                if (e.Type == NSEventType.LeftMouseUp)
+//                     System.Console.Write("test");
+//            }
         }
     }
 }

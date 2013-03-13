@@ -19,7 +19,8 @@ namespace MacLoader.UI {
         }
 
         protected void tbAddURL_Clicked(object sender, EventArgs e) {
-            var testWindow = new Form() { Size = new ED.Size(450,200) };
+            var testWindow = new Dialog() { Size = new ED.Size(450, 200) };
+            testWindow.DisplayMode = DialogDisplayMode.Attached;
 
 //            var popoverView = new Panel() { Size = new ED.Size(450, 200) };
             var layout = new DynamicLayout(testWindow);
@@ -28,7 +29,11 @@ namespace MacLoader.UI {
             layout.BeginVertical();
 
             var urlTextBoxLabel = new Label() { Text = "Enter links here:", TextColor = ED.Colors.Black  };
-            var urlTextBox = new TextArea() { Size = new ED.Size(200,100) };
+            var urlTextBox = new TextArea() { Size = new ED.Size(200, 100) };
+            urlTextBox.KeyDown += (se, ev) => { 
+                if (ev.Key == Key.Escape)
+                    testWindow.Close();
+            };
             var addFileButton = new Button() { Text = "Analyze" };
 
 //            testWindow.AddDockedControl(addFileButton, null);
@@ -36,14 +41,16 @@ namespace MacLoader.UI {
 
             layout.Add(urlTextBoxLabel, true, false);
             layout.Add(urlTextBox, true, false);
-            layout.Add(addFileButton, true, false);
+
+            layout.BeginHorizontal();
+
+            layout.Add(null, true);
+            layout.Add(addFileButton, false, false);
+            layout.EndHorizontal();
 
             layout.EndVertical();
 
-            var popover = new PopOver(testWindow);
-            popover.Show(sender as NSButton);
-
-//            testWindow.Show();
+            testWindow.ShowDialog(this);
         }
 
         protected void tbFilterDownloads_Clicked(object sender, EventArgs e) {
@@ -58,14 +65,6 @@ namespace MacLoader.UI {
             this.Close();
         }
 
-        protected override void OnMaximized(EventArgs e) {
-            base.OnMaximized(e);
-        }
-        
-        protected override void OnMinimized(EventArgs e) {
-            base.OnMinimized(e);
-        }
-        
         public override void OnClosing(System.ComponentModel.CancelEventArgs e) {
             base.OnClosing(e);
             /*
