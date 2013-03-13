@@ -43,7 +43,7 @@ namespace MacLoader.UI {
         void GenerateWindowContent() {
             createToolbar();
 
-            DynamicLayout layout = new DynamicLayout(this);
+            var layout = new DynamicLayout(this);
             layout.DefaultPadding = new Padding() {Left = 0, Right = 0, Bottom = 10, Top = 0};
             layout.BeginVertical();
 

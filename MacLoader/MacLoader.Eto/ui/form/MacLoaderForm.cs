@@ -7,7 +7,6 @@ using MonoMac.ObjCRuntime;
 using MacLoader.Helpers;
 using SD = System.Drawing;
 
-
 namespace MacLoader.UI {
     public partial class MacLoaderForm : Form {
         #region event handling
@@ -20,22 +19,31 @@ namespace MacLoader.UI {
         }
 
         protected void tbAddURL_Clicked(object sender, EventArgs e) {
-            Eto.Forms.Panel popoverView = new Panel();
-            popoverView.Size = new ED.Size(450, 200);
+            var testWindow = new Form() { Size = new ED.Size(450,200) };
 
-            var layout = new DynamicLayout(popoverView);
+//            var popoverView = new Panel() { Size = new ED.Size(450, 200) };
+            var layout = new DynamicLayout(testWindow);
+            layout.Padding = new ED.Padding(10, 10, 10, 10);
+
             layout.BeginVertical();
 
-            TextBox urlTextBox = new TextBox() { Text = "Enter URL here" };
-            var addFileButton = new Button() { Text = "Add" };
+            var urlTextBoxLabel = new Label() { Text = "Enter links here:", TextColor = ED.Colors.Black  };
+            var urlTextBox = new TextArea() { Size = new ED.Size(200,100) };
+            var addFileButton = new Button() { Text = "Analyze" };
 
-            layout.Add(urlTextBox);
-            layout.Add(addFileButton);
+//            testWindow.AddDockedControl(addFileButton, null);
+//            testWindow.AddDockedControl(urlTextBox, null);
+
+            layout.Add(urlTextBoxLabel, true, false);
+            layout.Add(urlTextBox, true, false);
+            layout.Add(addFileButton, true, false);
 
             layout.EndVertical();
 
-            var popover = new PopOver(popoverView.ControlObject as NSView);
+            var popover = new PopOver(testWindow);
             popover.Show(sender as NSButton);
+
+//            testWindow.Show();
         }
 
         protected void tbFilterDownloads_Clicked(object sender, EventArgs e) {
@@ -50,11 +58,11 @@ namespace MacLoader.UI {
             this.Close();
         }
 
-        public override void OnMaximized(EventArgs e) {
+        protected override void OnMaximized(EventArgs e) {
             base.OnMaximized(e);
         }
         
-        public override void OnMinimized(EventArgs e) {
+        protected override void OnMinimized(EventArgs e) {
             base.OnMinimized(e);
         }
         
