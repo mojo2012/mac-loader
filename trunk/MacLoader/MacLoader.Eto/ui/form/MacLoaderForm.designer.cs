@@ -36,14 +36,14 @@ namespace MacLoader.UI {
             GenerateWindowContent();
 
             //events
-            HandleEvent(MacLoaderForm.MaximizedEvent, MacLoaderForm.MinimizedEvent);
-            HandleEvent(MacLoaderForm.ClosedEvent, MacLoaderForm.ClosingEvent);
+				//HandleEvent(MacLoaderForm.WindowStateChangedEvent);
+				//HandleEvent(MacLoaderForm.ClosedEvent, MacLoaderForm.ClosingEvent);
         }
 
         void GenerateWindowContent() {
             createToolbar();
 
-            var layout = new DynamicLayout(this);
+				var layout = new DynamicLayout();
             layout.DefaultPadding = new Padding() {Left = 0, Right = 0, Bottom = 10, Top = 0};
             layout.BeginVertical();
 
@@ -73,6 +73,7 @@ namespace MacLoader.UI {
             //this.AddDockedControl(contentSplittler);
 
             layout.EndVertical();
+				Content = layout;
         }
 
         private void createToolbar() {

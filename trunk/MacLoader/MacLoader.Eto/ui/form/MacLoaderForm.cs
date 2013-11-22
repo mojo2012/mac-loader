@@ -8,7 +8,7 @@ using MacLoader.Helpers;
 using SD = System.Drawing;
 
 namespace MacLoader.UI {
-    public partial class MacLoaderForm : Form {
+    public partial class MacLoaderForm  {
         #region event handling
         protected void tbStartDownloads_Clicked(object sender, EventArgs e) {
             System.Console.WriteLine("tbStartDownloads_Clicked");
@@ -23,16 +23,17 @@ namespace MacLoader.UI {
             testWindow.DisplayMode = DialogDisplayMode.Attached;
 
 //            var popoverView = new Panel() { Size = new ED.Size(450, 200) };
-            var layout = new DynamicLayout(testWindow);
-            layout.Padding = new ED.Padding(10, 10, 10, 10);
+				//var layout = new DynamicLayout(testWindow);
+				DynamicLayout layout = null;
+				layout.Padding = new ED.Padding(10, 10, 10, 10);
 
             layout.BeginVertical();
 
             var urlTextBoxLabel = new Label() { Text = "Enter links here:", TextColor = ED.Colors.Black  };
             var urlTextBox = new TextArea() { Size = new ED.Size(200, 100) };
             urlTextBox.KeyDown += (se, ev) => { 
-                if (ev.Key == Key.Escape)
-                    testWindow.Close();
+					 //if (ev.Key == Key.Escape)
+					 //    testWindow.Close();
             };
             var addFileButton = new Button() { Text = "Analyze" };
 
